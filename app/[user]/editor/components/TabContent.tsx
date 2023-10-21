@@ -1,9 +1,12 @@
-import { useSearchParams } from "next/navigation";
+"use client";
+
+import useTabStore from "@/hooks/tabContent";
+import LinksForm from "./Links";
 
 const TabContent = () => {
-  const tab = useSearchParams();
-  const value = tab.get("tab");
-  return <div></div>;
+  const { tab } = useTabStore();
+
+  return <>{tab === "link" ? <LinksForm /> : null}</>;
 };
 
 export default TabContent;

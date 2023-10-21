@@ -12,12 +12,12 @@ export default function EditorLayout({
     <main className="p-5 space-y-5 h-full">
       <header className="bg-white flex flex-row justify-between items-center shadow-sm rounded-lg px-3 py-5 border border-neutral-950">
         <div className="flex flex-row gap-x-2 items-center">
-          <BsLink size={30} className="bg-blue-500 text-white rounded-md" />
+          <BsLink size={30} />
           <span className="font-bold text-2xl">devLinks</span>
         </div>
         <Tab />
         <Link href={`/${"sagar"}/preview`}>
-          <Button variant="bordered" radius="sm" color="primary" size="lg">
+          <Button variant="bordered" radius="sm" size="lg">
             Preview
           </Button>
         </Link>

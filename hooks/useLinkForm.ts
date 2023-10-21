@@ -1,101 +1,76 @@
-import { type } from "os";
-import { useReducer } from "react";
+import { create } from "zustand";
 
-type Direction = "up" | "down";
-export type FieldName = "selectedValue" | "value";
-
-interface Link {
+export type LinkInputProps = {
   id: number;
-  selectedValue: string;
-  value: string;
-}
-
-type Action =
-  | { type: "add" }
-  | { type: "move"; payload: { id: number; direction: Direction } }
-  | { type: "remove"; payload: number }
-  | {
-      type: "change";
-      payload: {
-        id: number;
-        fieldName: FieldName;
-        newValue: string;
-      };
-    };
-
-const initialState = {
-  nextLinkId: 1,
-  links: [] as Link[],
+  linkURL: string;
+  platform: string;
 };
 
-type State = typeof initialState;
+type LinkInputStore = {
+  linkInputs: LinkInputProps[];
+  addLinkInput: () => void;
+  removeLinkInput: (id: number) => void;
+  moveLinkInput: (id: number, direction: "up" | "down") => void;
+  updateLinkURL: (id: number, linkURL: string) => void;
+  updatePlatform: (id: number, platform: string) => void;
+};
 
-export function useLinkForm() {
-  const linkReducer = (state: State, action: Action): State => {
-    const { links } = state;
-    let updatedLinks: Link[] = [...links]; // Define updatedLinks here
-
-    switch (action.type) {
-      case "add":
-        const newLink: Link = {
-          id: state.nextLinkId,
-          selectedValue: "",
-          value: "",
-        };
-        return {
-          ...state,
-          nextLinkId: state.nextLinkId + 1,
-          links: [...links, newLink],
-        };
-
-      case "move":
-        const { id, direction } = action.payload;
-        const linkIndex = links.findIndex((link) => link.id === id);
-        if (linkIndex === -1) return state;
-
-        const canMoveUp = direction === "up" && linkIndex > 0;
-        const canMoveDown =
-          direction === "down" && linkIndex < links.length - 1;
-
-        if (!canMoveUp && !canMoveDown) return state;
-
-        updatedLinks = [...links];
-        const movedLink = updatedLinks[linkIndex];
-        updatedLinks.splice(linkIndex, 1);
-        updatedLinks.splice(
-          canMoveUp ? linkIndex - 1 : linkIndex + 1,
-          0,
-          movedLink
-        );
-
-        return { ...state, links: updatedLinks };
-
-      case "remove":
-        const idToRemove = action.payload;
-        updatedLinks = links.filter((link) => link.id !== idToRemove);
-        return { ...state, links: updatedLinks };
-
-      case "change":
-        const { id: linkId, fieldName, newValue } = action.payload;
-        updatedLinks = links.map((link) =>
-          link.id === linkId ? { ...link, [fieldName]: newValue } : link
-        );
-        return { ...state, links: updatedLinks };
-
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(linkReducer, initialState);
-
-  return {
-    links: state.links,
-    addLink: () => dispatch({ type: "add" }),
-    moveLink: (id: number, direction: Direction) =>
-      dispatch({ type: "move", payload: { id, direction } }),
-    removeLink: (id: number) => dispatch({ type: "remove", payload: id }),
-    handleLinkChange: (id: number, fieldName: FieldName, newValue: string) =>
-      dispatch({ type: "change", payload: { id, fieldName, newValue } }),
-  };
-}
+export const useLinkInputStore = create<LinkInputStore>()((set) => ({
+  linkInputs: [
+    { id: 1, linkURL: "", platform: "" },
+    { id: 2, linkURL: "", platform: "" },
+  ],
+  addLinkInput: () => {
+    set((state) => ({
+      linkInputs: [
+        ...state.linkInputs,
+        { id: state.linkInputs.length + 1, linkURL: "", platform: "" },
+      ],
+    }));
+  },
+  removeLinkInput: (id) => {
+    set((state) => ({
+      linkInputs: state.linkInputs.filter((input) => input.id !== id),
+    }));
+  },
+  moveLinkInput: (id, direction) => {
+    set((state) => {
+      const currentIndex = state.linkInputs.findIndex(
+        (input) => input.id === id
+      );
+      if (direction === "up" && currentIndex > 0) {
+        const updatedInputs = [...state.linkInputs];
+        [updatedInputs[currentIndex], updatedInputs[currentIndex - 1]] = [
+          updatedInputs[currentIndex - 1],
+          updatedInputs[currentIndex],
+        ];
+        return { linkInputs: updatedInputs };
+      } else if (
+        direction === "down" &&
+        currentIndex < state.linkInputs.length - 1
+      ) {
+        const updatedInputs = [...state.linkInputs];
+        [updatedInputs[currentIndex], updatedInputs[currentIndex + 1]] = [
+          updatedInputs[currentIndex + 1],
+          updatedInputs[currentIndex],
+        ];
+        return { linkInputs: updatedInputs };
+      }
+      return state;
+    });
+  },
+  updateLinkURL: (id, linkURL) => {
+    set((state) => ({
+      linkInputs: state.linkInputs.map((input) =>
+        input.id === id ? { ...input, linkURL } : input
+      ),
+    }));
+  },
+  updatePlatform: (id, platform) => {
+    set((state) => ({
+      linkInputs: state.linkInputs.map((input) =>
+        input.id === id ? { ...input, platform } : input
+      ),
+    }));
+  },
+}));
