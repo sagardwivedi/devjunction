@@ -4,7 +4,7 @@ import { useLinkStore } from "@/hooks/useLinkForm";
 import LinkInput from "./LinkInput";
 
 const LinksForm = () => {
-  const { addLinkInput, linkInputs } = useLinkStore();
+  const { addLinkInput, linkInputs, saveData } = useLinkStore();
 
   return (
     <div className="px-8 py-12">
@@ -37,7 +37,7 @@ const LinksForm = () => {
         </div>
       </div>
       <div className="mt-5 flex justify-end">
-        <Button>Save</Button>
+        <Button onClick={saveData}>Save</Button>
       </div>
     </div>
   );
