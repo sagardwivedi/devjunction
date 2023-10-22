@@ -1,31 +1,31 @@
-import { LinkInputProps, useLinkInputStore } from "@/hooks/useLinkForm";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 import { ChangeEvent } from "react";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 
-const LinkInput = ({ id, linkURL, platform }: LinkInputProps) => {
-  const { moveLinkInput, removeLinkInput, updateLinkURL, updatePlatform } =
-    useLinkInputStore();
+import { LinkInput, useLinkStore } from "@/hooks/useLinkForm";
+import { BiGitBranch } from "react-icons/bi";
+import { PlatformOptions } from "../data/data";
 
-  const handleLinkURLChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    updateLinkURL(id, newValue);
+const LinkInput = ({ id, link, platform }: LinkInput) => {
+  const { removeLinkInput, updateLinkInput, moveDown, moveUp } = useLinkStore();
+
+  const handleLinkChange = (e: ChangeEvent<HTMLInputElement>) => {
+    updateLinkInput(id, { link: e.target.value });
   };
 
   const handlePlatformChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValue = e.target.value;
-    updatePlatform(id, newValue);
+    updateLinkInput(id, { platform: e.target.value });
   };
 
   return (
-    <div className="space-y-5 bg-gray-50 rounded-lg px-2 py-4">
+    <div className="space-y-5 rounded-lg  bg-gray-50 px-2 py-4">
       <div className="flex flex-row justify-between">
         <div className="space-x-3">
           <span>Link #{id}</span>
           <Button
-            onClick={() => moveLinkInput(id, "up")}
+            onClick={() => moveUp(id)}
             size="sm"
             radius="full"
             isIconOnly
@@ -34,7 +34,7 @@ const LinkInput = ({ id, linkURL, platform }: LinkInputProps) => {
             <BsArrowUp />
           </Button>
           <Button
-            onClick={() => moveLinkInput(id, "down")}
+            onClick={() => moveDown(id)}
             size="sm"
             radius="full"
             isIconOnly
@@ -58,10 +58,37 @@ const LinkInput = ({ id, linkURL, platform }: LinkInputProps) => {
           onChange={handlePlatformChange}
           id="platform"
           name="platform"
+          classNames={{
+            trigger: "bg-white",
+          }}
+          popoverProps={{
+            classNames: {
+              base: "p-0 border-small border-divider bg-background",
+            },
+          }}
+          listboxProps={{
+            itemClasses: {
+              base: [
+                "rounded-md",
+                "text-default-500",
+                "transition-opacity",
+                "data-[hover=true]:text-foreground",
+                "data-[hover=true]:bg-default-100",
+                "data-[pressed=true]:opacity-70",
+              ],
+            },
+          }}
+          showScrollIndicators
         >
-          <SelectItem key={1} value={1}>
-            1
-          </SelectItem>
+          {PlatformOptions.map((item) => (
+            <SelectItem
+              key={item.platform}
+              value={item.platform}
+              startContent={item.logo || BiGitBranch}
+            >
+              {item.platform}
+            </SelectItem>
+          ))}
         </Select>
       </div>
       <div>
@@ -71,8 +98,8 @@ const LinkInput = ({ id, linkURL, platform }: LinkInputProps) => {
           placeholder="Enter your platform link"
           variant="bordered"
           radius="sm"
-          value={linkURL}
-          onChange={handleLinkURLChange}
+          value={link}
+          onChange={handleLinkChange}
         />
       </div>
     </div>

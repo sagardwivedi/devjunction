@@ -9,11 +9,11 @@ export default function EditorLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="p-5 space-y-5 h-full">
-      <header className="bg-white flex flex-row justify-between items-center shadow-sm rounded-lg px-3 py-5 border border-neutral-950">
-        <div className="flex flex-row gap-x-2 items-center">
+    <main className="h-full space-y-5 p-5">
+      <header className="flex flex-row items-center justify-between rounded-lg border border-neutral-950 bg-white px-3 py-5 shadow-sm">
+        <div className="flex flex-row items-center gap-x-2">
           <BsLink size={30} />
-          <span className="font-bold text-2xl">devLinks</span>
+          <span className="text-2xl font-bold">devLinks</span>
         </div>
         <Tab />
         <Link href={`/${"sagar"}/preview`}>

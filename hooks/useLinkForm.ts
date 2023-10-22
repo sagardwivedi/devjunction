@@ -1,76 +1,84 @@
 import { create } from "zustand";
 
-export type LinkInputProps = {
+export type LinkInput = {
   id: number;
-  linkURL: string;
+  link: string;
   platform: string;
 };
 
-type LinkInputStore = {
-  linkInputs: LinkInputProps[];
+type LinkStoreState = {
+  linkInputs: LinkInput[];
   addLinkInput: () => void;
   removeLinkInput: (id: number) => void;
-  moveLinkInput: (id: number, direction: "up" | "down") => void;
-  updateLinkURL: (id: number, linkURL: string) => void;
-  updatePlatform: (id: number, platform: string) => void;
+  moveUp: (id: number) => void;
+  moveDown: (id: number) => void;
+  updateLinkInput: (
+    id: number,
+    updatedValues: Partial<Omit<LinkInput, "id">>,
+  ) => void;
 };
 
-export const useLinkInputStore = create<LinkInputStore>()((set) => ({
-  linkInputs: [
-    { id: 1, linkURL: "", platform: "" },
-    { id: 2, linkURL: "", platform: "" },
-  ],
-  addLinkInput: () => {
-    set((state) => ({
-      linkInputs: [
-        ...state.linkInputs,
-        { id: state.linkInputs.length + 1, linkURL: "", platform: "" },
-      ],
-    }));
-  },
-  removeLinkInput: (id) => {
-    set((state) => ({
-      linkInputs: state.linkInputs.filter((input) => input.id !== id),
-    }));
-  },
-  moveLinkInput: (id, direction) => {
-    set((state) => {
-      const currentIndex = state.linkInputs.findIndex(
-        (input) => input.id === id
-      );
-      if (direction === "up" && currentIndex > 0) {
-        const updatedInputs = [...state.linkInputs];
-        [updatedInputs[currentIndex], updatedInputs[currentIndex - 1]] = [
-          updatedInputs[currentIndex - 1],
-          updatedInputs[currentIndex],
-        ];
-        return { linkInputs: updatedInputs };
-      } else if (
-        direction === "down" &&
-        currentIndex < state.linkInputs.length - 1
-      ) {
-        const updatedInputs = [...state.linkInputs];
-        [updatedInputs[currentIndex], updatedInputs[currentIndex + 1]] = [
-          updatedInputs[currentIndex + 1],
-          updatedInputs[currentIndex],
-        ];
-        return { linkInputs: updatedInputs };
-      }
-      return state;
-    });
-  },
-  updateLinkURL: (id, linkURL) => {
-    set((state) => ({
-      linkInputs: state.linkInputs.map((input) =>
-        input.id === id ? { ...input, linkURL } : input
-      ),
-    }));
-  },
-  updatePlatform: (id, platform) => {
-    set((state) => ({
-      linkInputs: state.linkInputs.map((input) =>
-        input.id === id ? { ...input, platform } : input
-      ),
-    }));
-  },
-}));
+export const useLinkStore = create<LinkStoreState>()((set) => {
+  let nextId = 1;
+
+  return {
+    linkInputs: [],
+
+    addLinkInput: () => {
+      set((state) => {
+        const id = nextId++;
+        const newLinkInput: LinkInput = { id, link: "", platform: "" };
+        state.linkInputs.push(newLinkInput);
+        return { linkInputs: [...state.linkInputs] };
+      });
+    },
+
+    removeLinkInput: (id) => {
+      set((state) => {
+        state.linkInputs = state.linkInputs.filter(
+          (linkInput) => linkInput.id !== id,
+        );
+        return { linkInputs: [...state.linkInputs] };
+      });
+    },
+
+    moveUp: (id) => {
+      set((state) => {
+        const index = state.linkInputs.findIndex(
+          (linkInput) => linkInput.id === id,
+        );
+        if (index > 0) {
+          [state.linkInputs[index - 1], state.linkInputs[index]] = [
+            state.linkInputs[index],
+            state.linkInputs[index - 1],
+          ];
+        }
+        return { linkInputs: [...state.linkInputs] };
+      });
+    },
+
+    moveDown: (id) => {
+      set((state) => {
+        const index = state.linkInputs.findIndex(
+          (linkInput) => linkInput.id === id,
+        );
+        if (index < state.linkInputs.length - 1) {
+          [state.linkInputs[index], state.linkInputs[index + 1]] = [
+            state.linkInputs[index + 1],
+            state.linkInputs[index],
+          ];
+        }
+        return { linkInputs: [...state.linkInputs] };
+      });
+    },
+
+    updateLinkInput: (id, updatedValues) => {
+      set((state) => {
+        state.linkInputs = state.linkInputs.map((linkInput) =>
+          linkInput.id === id ? { ...linkInput, ...updatedValues } : linkInput,
+        );
+        return { linkInputs: [...state.linkInputs] };
+      });
+    },
+  };
+});

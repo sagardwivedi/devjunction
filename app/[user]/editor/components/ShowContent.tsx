@@ -1,7 +1,9 @@
-import { useLinkInputStore } from "@/hooks/useLinkForm";
+"use client";
+
+import { useLinkStore } from "@/hooks/useLinkForm";
 
 const ShowContent = () => {
-  const { linkInputs } = useLinkInputStore();
+  const { linkInputs } = useLinkStore();
   console.log(linkInputs);
   return <div>{JSON.stringify(linkInputs)}</div>;
 };

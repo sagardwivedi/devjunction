@@ -1,9 +1,10 @@
-import { useLinkInputStore } from "@/hooks/useLinkForm";
 import { Button } from "@nextui-org/button";
+
+import { useLinkStore } from "@/hooks/useLinkForm";
 import LinkInput from "./LinkInput";
 
 const LinksForm = () => {
-  const { addLinkInput, linkInputs } = useLinkInputStore();
+  const { addLinkInput, linkInputs } = useLinkStore();
 
   return (
     <div className="px-8 py-12">
@@ -27,7 +28,7 @@ const LinksForm = () => {
             Add new link
           </Button>
         </div>
-        <div className="will-change-scroll space-y-5 overflow-y-auto h-[420px] scrollbar-hide">
+        <div className="h-[420px] space-y-5 overflow-y-auto will-change-scroll scrollbar-hide">
           {linkInputs.map((link) => (
             <div key={link.id}>
               <LinkInput {...link} />
@@ -35,7 +36,7 @@ const LinksForm = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-end mt-5">
+      <div className="mt-5 flex justify-end">
         <Button>Save</Button>
       </div>
     </div>

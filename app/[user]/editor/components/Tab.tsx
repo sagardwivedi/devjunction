@@ -19,7 +19,7 @@ const Tabs = () => {
   const createTab = (tabName: string, Icon: IconType, label: string) => (
     <div
       onClick={() => handleClick(tabName)} // Corrected here
-      className="cursor-pointer flex items-center gap-x-2 hover:bg-blue-500/50 hover:text-white px-4 py-2 rounded-lg"
+      className="flex cursor-pointer items-center gap-x-2 rounded-lg px-4 py-2 hover:bg-blue-500/50 hover:text-white"
     >
       <Icon size={20} />
       <span>{label}</span>
