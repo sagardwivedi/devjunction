@@ -5,11 +5,13 @@ import { ChangeEvent } from "react";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 
 import { LinkInput, useLinkStore } from "@/hooks/useLinkForm";
-import { BiGitBranch } from "react-icons/bi";
 import { PlatformOptions } from "../data/data";
 
 const LinkInput = ({ id, link, platform }: LinkInput) => {
   const { removeLinkInput, updateLinkInput, moveDown, moveUp } = useLinkStore();
+  const disabledPlatforms = useLinkStore((state) =>
+    state.getPlatformsForDisable(state)
+  );
 
   const handleLinkChange = (e: ChangeEvent<HTMLInputElement>) => {
     updateLinkInput(id, { link: e.target.value });
@@ -54,10 +56,7 @@ const LinkInput = ({ id, link, platform }: LinkInput) => {
           radius="sm"
           placeholder="Select a platform"
           variant="bordered"
-          value={platform}
           onChange={handlePlatformChange}
-          id="platform"
-          name="platform"
           classNames={{
             trigger: "bg-white",
           }}
@@ -66,29 +65,22 @@ const LinkInput = ({ id, link, platform }: LinkInput) => {
               base: "p-0 border-small border-divider bg-background",
             },
           }}
-          listboxProps={{
-            itemClasses: {
-              base: [
-                "rounded-md",
-                "text-default-500",
-                "transition-opacity",
-                "data-[hover=true]:text-foreground",
-                "data-[hover=true]:bg-default-100",
-                "data-[pressed=true]:opacity-70",
-              ],
-            },
+          items={PlatformOptions}
+          renderValue={(items) => {
+            return items.map((item) => (
+              <div key={item.key} className="flex flex-row gap-2">
+                <div>{item.data && <item.data.logo size={20} />}</div>
+                <div>{item.data?.platform}</div>
+              </div>
+            ));
           }}
-          showScrollIndicators
+          disabledKeys={disabledPlatforms}
         >
-          {PlatformOptions.map((item) => (
-            <SelectItem
-              key={item.platform}
-              value={item.platform}
-              startContent={item.logo || BiGitBranch}
-            >
-              {item.platform}
+          {(PlatformOptions) => (
+            <SelectItem key={PlatformOptions.platform}>
+              <div></div>
             </SelectItem>
-          ))}
+          )}
         </Select>
       </div>
       <div>

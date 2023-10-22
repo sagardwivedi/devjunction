@@ -17,7 +17,7 @@ type LinkStoreState = {
     id: number,
     updatedValues: Partial<Omit<LinkInput, "id">>
   ) => void;
-  saveData: () => void;
+  getPlatformsForDisable: (state: LinkStoreState) => string[];
 };
 
 export const useLinkStore = create<LinkStoreState>()((set) => {
@@ -87,21 +87,11 @@ export const useLinkStore = create<LinkStoreState>()((set) => {
       });
     },
 
-    saveData: () => {
-      set((state) => {
-        const nonEmptyInputs = state.linkInputs.filter(
-          (input) => input.link.trim() !== "" && input.platform.trim() !== ""
-        );
-
-        if (nonEmptyInputs.length > 0) {
-          state.savedData = nonEmptyInputs;
-          console.log("Data saved successfully.");
-        } else {
-          console.log("No valid data to save.");
-        }
-
-        return { savedData: [...state.savedData] };
-      });
+    getPlatformsForDisable: (state) => {
+      const platforms = state.linkInputs
+        .filter((linkInput) => linkInput.link.trim() !== "") // Check if the link is not empty
+        .map((linkInput) => linkInput.platform); // Extract the platform
+      return platforms;
     },
   };
 });
