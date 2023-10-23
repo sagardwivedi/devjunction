@@ -1,35 +1,86 @@
 "use client";
 
-import { LinkInput, useLinkStore } from "@/hooks/useLinkForm";
+import { Route } from "next";
 import Link from "next/link";
 
-function Platform({ id, link, platform }: LinkInput) {
+import { useLinkStore } from "@/hooks/useLinkForm";
+import { useProfileStore } from "@/hooks/useProfileStore";
+import Image from "next/image";
+import { BsArrowRight } from "react-icons/bs";
+import { getPlatformData } from "../data/data";
+
+export function Platform<T extends string>({
+  link,
+  platform,
+}: {
+  link: Route<T> | URL;
+  platform: string;
+}) {
+  const value = getPlatformData(platform);
+
   return (
-    <Link href={link} className="bg-green-400 w-[80%] h-8 rounded-md">
-      <div>{}</div>
-      <div>{platform}</div>
+    <Link
+      href={link}
+      className={`${
+        value ? value.backgroundColor : "bg-gray-200"
+      } rounded-md h-12 group w-full text-white px-4 flex flex-row justify-between items-center`}
+    >
+      <div className="flex flex-row gap-x-2">
+        {value && <value.logo size={25} />}
+        <span>{platform}</span>
+      </div>
+      {value && (
+        <BsArrowRight
+          color="white"
+          size={25}
+          className="group-hover:translate-x-1 transition"
+        />
+      )}
     </Link>
   );
 }
 
 const ShowContent = () => {
-  const { linkInputs } = useLinkStore();
+  const { inputs } = useLinkStore();
+  const { profile } = useProfileStore();
 
   return (
-    <div className="flex justify-center h-full items-center">
-      <div className="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
-        <div className="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
-        <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-        <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-        <div className="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
-
-        <div className="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white ">
-          <div className="flex flex-col gap-y-5 h-full justify-center items-center w-full bg-red-300">
-            <div className="overflow-y-auto h-[400px] will-change-scroll w-full">
-              {linkInputs.map((item) => (
-                <Platform key={item.id} {...item} />
-              ))}
+    <div className="relative flex h-full justify-center py-10">
+      {/* Phone Mockup */}
+      <div className="bg-black w-[350px] rounded-3xl h-[650px] relative">
+        {/* Content */}
+        <div className="absolute top-3 rounded-[2rem] left-2 w-[95%] h-[95%] bg-white flex flex-col items-center space-y-10 p-5">
+          <div className="space-y-3 text-center">
+            <div className="h-40 w-40 mb-5 rounded-full relative overflow-hidden">
+              {profile.image ? (
+                <Image
+                  src={profile.image}
+                  alt=""
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-gray-200" />
+              )}
             </div>
+            {profile.firstName || profile.lastName ? (
+              <p className="space-x-2 font-semibold text-xl">
+                <span>{profile.firstName}</span>
+                <span>{profile.lastName}</span>
+              </p>
+            ) : (
+              <p className="rounded-lg bg-gray-200 h-6"></p>
+            )}
+            {profile.email ? (
+              <p>{profile.email}</p>
+            ) : (
+              <p className="rounded-lg bg-gray-200 text-sm h-6 w-[70%] mx-auto"></p>
+            )}
+          </div>
+          <div className="w-full space-y-4 overflow-y-auto scroll-smooth scrollbar-hide rounded-md">
+            {Object.values(inputs).map((item) => (
+              <Platform key={item.id} {...item} />
+            ))}
           </div>
         </div>
       </div>

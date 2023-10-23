@@ -10,7 +10,7 @@ export default function EditorLayout({
 }) {
   return (
     <main className="h-full space-y-5 p-5">
-      <header className="flex flex-row items-center justify-between rounded-lg border border-neutral-950 bg-white px-3 py-5 shadow-sm">
+      <header className="flex flex-row items-center justify-between rounded-lg  bg-white px-3 py-5 shadow-sm">
         <div className="flex flex-row items-center gap-x-2">
           <BsLink size={30} />
           <span className="text-2xl font-bold">devLinks</span>

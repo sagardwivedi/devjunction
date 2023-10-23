@@ -1,14 +1,13 @@
 "use client";
 
 import { useQueryState } from "next-usequerystate";
-import { IconType } from "react-icons";
 import { BiLink } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
 
 import useTabStore from "@/hooks/tabContent";
 
 const Tabs = () => {
-  const [, setTab] = useQueryState("tab");
+  const [tab, setTab] = useQueryState("tab");
   const { setTabState } = useTabStore();
 
   const handleClick = (value: string) => {
@@ -16,20 +15,28 @@ const Tabs = () => {
     setTabState(value);
   };
 
-  const createTab = (tabName: string, Icon: IconType, label: string) => (
-    <div
-      onClick={() => handleClick(tabName)} // Corrected here
-      className="flex cursor-pointer items-center gap-x-2 rounded-lg px-4 py-2 hover:bg-blue-500/50 hover:text-white"
-    >
-      <Icon size={20} />
-      <span>{label}</span>
-    </div>
-  );
+  const isSelected = tab === "link";
 
   return (
     <div className="flex gap-x-5">
-      {createTab("link", BiLink, "Links")}
-      {createTab("profile", BsPersonCircle, "Profile Details")}
+      <div
+        onClick={() => handleClick("link")}
+        className={`flex cursor-pointer items-center gap-x-2 rounded-lg px-4 py-2 ${
+          isSelected ? "bg-gray-200" : "hover:bg-gray-100"
+        }`}
+      >
+        <BiLink size={20} />
+        <span>Link</span>
+      </div>
+      <div
+        onClick={() => handleClick("profile")}
+        className={`flex cursor-pointer items-center gap-x-2 rounded-lg px-4 py-2 ${
+          !isSelected ? "bg-gray-200" : "hover:bg-gray-100"
+        }`}
+      >
+        <BsPersonCircle size={20} />
+        <span>Profile Details</span>
+      </div>
     </div>
   );
 };

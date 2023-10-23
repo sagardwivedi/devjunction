@@ -4,7 +4,7 @@ import { useLinkStore } from "@/hooks/useLinkForm";
 import LinkInput from "./LinkInput";
 
 const LinksForm = () => {
-  const { addLinkInput, linkInputs, saveData } = useLinkStore();
+  const { addInput, inputs } = useLinkStore();
 
   return (
     <div className="px-8 py-12">
@@ -19,25 +19,20 @@ const LinksForm = () => {
               he world.
             </p>
           </div>
-          <Button
-            onClick={addLinkInput}
-            variant="bordered"
-            radius="sm"
-            fullWidth
-          >
+          <Button onClick={addInput} variant="bordered" radius="sm" fullWidth>
             Add new link
           </Button>
         </div>
-        <div className="h-[420px] space-y-5 overflow-y-auto will-change-scroll scrollbar-hide">
-          {linkInputs.map((link) => (
+        <div className="h-[420px] space-y-5 overflow-y-auto rounded-md will-change-scroll scrollbar-hide">
+          {Object.values(inputs).map((link) => (
             <div key={link.id}>
               <LinkInput {...link} />
             </div>
           ))}
         </div>
       </div>
-      <div className="mt-5 flex justify-end">
-        <Button onClick={saveData}>Save</Button>
+      <div className="mt-5 flex border-t justify-end">
+        <Button className="mt-5" size="md" radius="sm">Save</Button>
       </div>
     </div>
   );

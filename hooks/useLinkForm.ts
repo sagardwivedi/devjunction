@@ -7,91 +7,86 @@ export type LinkInput = {
 };
 
 type LinkStoreState = {
-  linkInputs: LinkInput[];
-  savedData: LinkInput[];
-  addLinkInput: () => void;
-  removeLinkInput: (id: number) => void;
+  inputs: LinkInput[];
+  nextId: number;
+  addInput: () => void;
+  removeInput: (id: number) => void;
   moveUp: (id: number) => void;
   moveDown: (id: number) => void;
-  updateLinkInput: (
-    id: number,
-    updatedValues: Partial<Omit<LinkInput, "id">>
-  ) => void;
-  getPlatformsForDisable: (state: LinkStoreState) => string[];
+  updateInput: (id: number, updatedInput: Partial<LinkInput>) => void;
+  getUniquePlatforms: (state: LinkStoreState) => string[];
 };
 
-export const useLinkStore = create<LinkStoreState>()((set) => {
-  let nextId = 1;
-
+export const useLinkStore = create<LinkStoreState>((set) => {
   return {
-    linkInputs: [
-      { id: nextId++, link: "", platform: "" },
-      { id: nextId++, link: "", platform: "" },
+    inputs: [
+      { id: 1, link: "", platform: "" },
+      { id: 2, link: "", platform: "" },
     ],
-    savedData: [],
+    nextId: 3,
 
-    addLinkInput: () => {
+    addInput: () => {
       set((state) => {
-        const id = nextId++;
-        const newLinkInput: LinkInput = { id, link: "", platform: "" };
-        state.linkInputs.push(newLinkInput);
-        return { linkInputs: [...state.linkInputs] };
+        const id = state.nextId;
+        const newInput: LinkInput = { id, link: "", platform: "" };
+        state.inputs.push(newInput);
+        state.nextId++;
+        return { inputs: [...state.inputs], nextId: state.nextId };
       });
     },
 
-    removeLinkInput: (id) => {
+    removeInput: (id) => {
       set((state) => {
-        state.linkInputs = state.linkInputs.filter(
-          (linkInput) => linkInput.id !== id
-        );
-        return { linkInputs: [...state.linkInputs] };
+        state.inputs = state.inputs.filter((input) => input.id !== id);
+        return { inputs: [...state.inputs] };
       });
     },
 
     moveUp: (id) => {
       set((state) => {
-        const index = state.linkInputs.findIndex(
-          (linkInput) => linkInput.id === id
-        );
+        const index = state.inputs.findIndex((input) => input.id === id);
         if (index > 0) {
-          [state.linkInputs[index - 1], state.linkInputs[index]] = [
-            state.linkInputs[index],
-            state.linkInputs[index - 1],
+          [state.inputs[index - 1], state.inputs[index]] = [
+            state.inputs[index],
+            state.inputs[index - 1],
           ];
         }
-        return { linkInputs: [...state.linkInputs] };
+        return { inputs: [...state.inputs] };
       });
     },
 
     moveDown: (id) => {
       set((state) => {
-        const index = state.linkInputs.findIndex(
-          (linkInput) => linkInput.id === id
-        );
-        if (index < state.linkInputs.length - 1) {
-          [state.linkInputs[index], state.linkInputs[index + 1]] = [
-            state.linkInputs[index + 1],
-            state.linkInputs[index],
+        const index = state.inputs.findIndex((input) => input.id === id);
+        if (index < state.inputs.length - 1) {
+          [state.inputs[index], state.inputs[index + 1]] = [
+            state.inputs[index + 1],
+            state.inputs[index],
           ];
         }
-        return { linkInputs: [...state.linkInputs] };
+        return { inputs: [...state.inputs] };
       });
     },
 
-    updateLinkInput: (id, updatedValues) => {
+    updateInput: (id, updatedInput) => {
       set((state) => {
-        state.linkInputs = state.linkInputs.map((linkInput) =>
-          linkInput.id === id ? { ...linkInput, ...updatedValues } : linkInput
-        );
-        return { linkInputs: [...state.linkInputs] };
+        const index = state.inputs.findIndex((input) => input.id === id);
+        if (index !== -1) {
+          state.inputs[index] = { ...state.inputs[index], ...updatedInput };
+        }
+        return { inputs: [...state.inputs] };
       });
     },
 
-    getPlatformsForDisable: (state) => {
-      const platforms = state.linkInputs
-        .filter((linkInput) => linkInput.link.trim() !== "") // Check if the link is not empty
-        .map((linkInput) => linkInput.platform); // Extract the platform
-      return platforms;
+    getUniquePlatforms: (state: LinkStoreState) => {
+      const platformsSet = new Set<string>();
+      state.inputs.forEach((input) => {
+        const platform = input.platform;
+        if (platform) {
+          platformsSet.add(platform);
+        }
+      });
+      return Array.from(platformsSet);
     },
   };
 });
