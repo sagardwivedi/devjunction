@@ -5,10 +5,17 @@ const config: Config = {
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|input|select).js",
+    "./node_modules/@nextui-org/theme/dist/components/(button|input|select|avatar).js",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      nunito: ["var(--nunito)", "sans-serif"],
+    },
+    extend: {
+      colors: {
+        primary_c: "#7FB069",
+      },
+    },
   },
   plugins: [nextui()],
 };
