@@ -9,12 +9,12 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      nunito: ["var(--nunito)", "sans"],
-      jua: ["var(--jua)", "sans-serif"],
+      work_sans: ["var(--work_sans)", "sans"],
+      syne: ["var(--syne)", "sans-serif"],
     },
     extend: {
       colors: {
-        primary_c: "#7FB069",
+        primary_c: "#B8B8FF",
       },
     },
   },

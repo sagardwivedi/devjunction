@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jua, Nunito } from "next/font/google";
+import { Syne, Work_Sans } from "next/font/google";
 
 import "./globals.css";
 import Providers from "./providers";
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   title: "DevLinks",
 };
 
-const nunito = Nunito({ subsets: ["latin"], variable: "--nunito" });
-const jua = Jua({ subsets: ["latin"], weight: ["400"], variable: "--jua" });
+const work_sans = Work_Sans({ subsets: ["latin"], variable: "--work_sans" });
+const syne = Syne({ subsets: ["latin"], variable: "--syne" });
 
 export default function RootLayout({
   children,
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable}${jua.variable}`}>
+      <body className={`${work_sans.variable}${syne.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>
