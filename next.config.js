@@ -4,7 +4,7 @@ const nextConfig = {
     optimizePackageImports: ["react-icons"],
   },
   images:{
-    domains:["external-content.duckduckgo.com"]
+    domains:["images.unsplash.com", "plus.unsplash.com"]
   }
 };
 

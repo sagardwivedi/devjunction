@@ -9,7 +9,8 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      nunito: ["var(--nunito)", "sans-serif"],
+      nunito: ["var(--nunito)", "sans"],
+      jua: ["var(--jua)", "sans-serif"],
     },
     extend: {
       colors: {
