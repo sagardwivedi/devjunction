@@ -3,18 +3,18 @@ import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
-    <div className="flex h-auto min-h-[600px] w-full flex-row flex-nowrap items-center justify-center gap-24 p-24">
-      <div className="flex h-auto w-full flex-row flex-nowrap items-center justify-center gap-14">
-        <div className="flex h-auto w-full max-w-[800px] flex-col flex-nowrap items-start justify-center gap-5">
-          <div className="flex flex-row flex-nowrap items-center justify-center gap-2 rounded-[100px] border border-white p-3">
+    <div className="flex h-auto md:min-h-[600px] w-full flex-row flex-nowrap items-center justify-center gap-[50px] p-5 md:gap-[100px] md:p-[100px]">
+      <div className="flex h-auto w-full flex-col flex-nowrap items-center justify-center gap-[60px] md:flex-row">
+        <div className="flex h-auto w-full max-w-[800px] flex-col flex-nowrap items-center md:items-start justify-center gap-5">
+          <div className="flex flex-row flex-nowrap items-center justify-center rounded-full py-[10px] px-5 border border-white">
             <p className="text-start font-sans font-bold leading-[1.2em] text-primary">
               DevLinks
             </p>
           </div>
-          <h1 className="text-start font-serif text-[80px] leading-[1.1em] text-primary">
+          <h1 className="md:text-start text-center font-serif text-4xl md:text-[80px] leading-[1.1em] text-primary">
             Unleash your online presence
           </h1>
-          <Button className="rounded-full bg-secondary px-5 py-[10px] font-sans font-bold leading-[1.5em] text-black hover:bg-primary">
+          <Button className="rounded-full max-md:w-full bg-secondary px-5 py-[10px] font-sans font-bold leading-[1.5em] text-black hover:bg-primary">
             Get Started
           </Button>
         </div>
