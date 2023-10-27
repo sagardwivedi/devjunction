@@ -23,7 +23,7 @@ const LinksForm = () => {
             Add new link
           </Button>
         </div>
-        <div className="h-[420px] space-y-5 overflow-y-auto rounded-md will-change-scroll scrollbar-hide">
+        <div className="scrollbar-hide h-[420px] space-y-5 overflow-y-auto rounded-md will-change-scroll">
           {Object.values(inputs).map((link) => (
             <div key={link.id}>
               <LinkInput {...link} />
@@ -31,8 +31,10 @@ const LinksForm = () => {
           ))}
         </div>
       </div>
-      <div className="mt-5 flex border-t justify-end">
-        <Button className="mt-5" size="md" radius="sm">Save</Button>
+      <div className="mt-5 flex justify-end border-t">
+        <Button className="mt-5" size="md" radius="sm">
+          Save
+        </Button>
       </div>
     </div>
   );

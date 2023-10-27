@@ -23,7 +23,7 @@ export function Platform<T extends string>({
       href={link}
       className={`${
         value ? value.backgroundColor : "bg-gray-200"
-      } rounded-md h-12 group w-full text-white px-4 flex flex-row justify-between items-center`}
+      } group flex h-12 w-full flex-row items-center justify-between rounded-md px-4 text-white`}
     >
       <div className="flex flex-row gap-x-2">
         {value && <value.logo size={25} />}
@@ -33,7 +33,7 @@ export function Platform<T extends string>({
         <BsArrowRight
           color="white"
           size={25}
-          className="group-hover:translate-x-1 transition"
+          className="transition group-hover:translate-x-1"
         />
       )}
     </Link>
@@ -47,11 +47,11 @@ const ShowContent = () => {
   return (
     <div className="relative flex h-full justify-center py-10">
       {/* Phone Mockup */}
-      <div className="bg-black w-[350px] rounded-3xl h-[650px] relative">
+      <div className="relative h-[650px] w-[350px] rounded-3xl bg-black">
         {/* Content */}
-        <div className="absolute top-3 rounded-[2rem] left-2 w-[95%] h-[95%] bg-white flex flex-col items-center space-y-10 p-5">
+        <div className="absolute left-2 top-3 flex h-[95%] w-[95%] flex-col items-center space-y-10 rounded-[2rem] bg-white p-5">
           <div className="space-y-3 text-center">
-            <div className="h-40 w-40 mb-5 rounded-full relative overflow-hidden">
+            <div className="relative mb-5 h-40 w-40 overflow-hidden rounded-full">
               {profile.image ? (
                 <Image
                   src={profile.image}
@@ -64,20 +64,20 @@ const ShowContent = () => {
               )}
             </div>
             {profile.firstName || profile.lastName ? (
-              <p className="space-x-2 font-semibold text-xl">
+              <p className="space-x-2 text-xl font-semibold">
                 <span>{profile.firstName}</span>
                 <span>{profile.lastName}</span>
               </p>
             ) : (
-              <p className="rounded-lg bg-gray-200 h-6"></p>
+              <p className="h-6 rounded-lg bg-gray-200"></p>
             )}
             {profile.email ? (
               <p>{profile.email}</p>
             ) : (
-              <p className="rounded-lg bg-gray-200 text-sm h-6 w-[70%] mx-auto"></p>
+              <p className="mx-auto h-6 w-[70%] rounded-lg bg-gray-200 text-sm"></p>
             )}
           </div>
-          <div className="w-full space-y-4 overflow-y-auto scroll-smooth scrollbar-hide rounded-md">
+          <div className="scrollbar-hide w-full space-y-4 overflow-y-auto scroll-smooth rounded-md">
             {Object.values(inputs).map((item) => (
               <Platform key={item.id} {...item} />
             ))}

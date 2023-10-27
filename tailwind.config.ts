@@ -1,23 +1,45 @@
-import { nextui } from "@nextui-org/theme";
-import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-const config: Config = {
-  content: [
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|input|select|avatar).js",
-  ],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
+  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   theme: {
-    fontFamily: {
-      work_sans: ["var(--work_sans)", "sans"],
-      syne: ["var(--syne)", "sans-serif"],
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        sans: ["var(--manrope)", ...fontFamily.sans],
+        serif: ["var(--gloock)", ...fontFamily.serif],
+      },
       colors: {
-        primary_c: "#B8B8FF",
+        primary: "#F2F4F3",
+        secondary: "#A9927D",
+        background: "#0A0908",
+      },
+      borderRadius: {
+        200: "200px",
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [require("tailwindcss-animate")],
 };
-export default config;

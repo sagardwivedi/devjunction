@@ -29,11 +29,11 @@ function ImageSelector() {
 
   return (
     <div className="bg-neutral-50 px-2 py-4">
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row items-center justify-between">
         <div className="text-gray-500">Profile Picture</div>
         <div className="flex flex-row items-center gap-x-4">
           <div
-            className="h-[200px] w-[200px] relative cursor-pointer"
+            className="relative h-[200px] w-[200px] cursor-pointer"
             onClick={openImageSelector}
           >
             {profile.image ? (
@@ -42,15 +42,15 @@ function ImageSelector() {
                   src={profile.image}
                   fill
                   alt=""
-                  className="object-cover rounded-lg"
+                  className="rounded-lg object-cover"
                 />
-                <div className="bg-black/30 rounded-lg flex-col text-white absolute h-full flex justify-center items-center w-full">
+                <div className="absolute flex h-full w-full flex-col items-center justify-center rounded-lg bg-black/30 text-white">
                   <PiImage size={35} />
                   <p>Change Image</p>
                 </div>
               </>
             ) : (
-              <div className="h-full w-full bg-gray-200 rounded-lg" />
+              <div className="h-full w-full rounded-lg bg-gray-200" />
             )}
             <input
               type="file"
@@ -117,9 +117,9 @@ function PersonalInfo() {
 
 const ProfileTab = () => {
   return (
-    <div className="px-8 py-10 h-full">
-      <div className="flex flex-col justify-between h-full">
-        <div className="space-y-8 mb-8">
+    <div className="h-full px-8 py-10">
+      <div className="flex h-full flex-col justify-between">
+        <div className="mb-8 space-y-8">
           <div className="space-y-3">
             <h1 className="text-3xl font-bold text-neutral-800 ">
               Profile Details
@@ -130,7 +130,7 @@ const ProfileTab = () => {
           <PersonalInfo />
         </div>
         <div>
-          <div className="mt-5 flex border-t border-neutral-300 justify-end">
+          <div className="mt-5 flex justify-end border-t border-neutral-300">
             <Button className="mt-5" size="md" radius="sm">
               Save
             </Button>

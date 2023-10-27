@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Syne, Work_Sans } from "next/font/google";
+import { Gloock, Manrope, Syne, Work_Sans } from "next/font/google";
 
+import { cn } from "@/lib/utils";
 import "./globals.css";
-import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "DevLinks",
 };
 
-const work_sans = Work_Sans({ subsets: ["latin"], variable: "--work_sans" });
-const syne = Syne({ subsets: ["latin"], variable: "--syne" });
+const manrope = Manrope({ subsets: ["latin"], variable: "--manrope" });
+const gloock = Gloock({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--gloock",
+});
 
 export default function RootLayout({
   children,
@@ -18,8 +22,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${work_sans.variable}${syne.variable}`}>
-        <Providers>{children}</Providers>
+      <body
+        className={cn(
+          "min-h-screen bg-background",
+          manrope.variable,
+          gloock.variable,
+        )}
+      >
+        {children}
       </body>
     </html>
   );

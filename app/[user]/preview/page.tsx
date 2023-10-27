@@ -9,13 +9,13 @@ const Preview = () => {
   const { profile } = useProfileStore();
   const { inputs } = useLinkStore();
   return (
-    <div className="flex justify-center items-center mt-24 shadow-xl bg-white max-w-sm mx-auto rounded-xl">
-      <div className="p-10 space-y-8 w-full">
-        <div className="space-y-2 flex flex-col items-center">
-          <div className="h-32 border-[5px] border-secondary-500 rounded-full overflow-hidden w-32 relative">
+    <div className="mx-auto mt-24 flex max-w-sm items-center justify-center rounded-xl bg-white shadow-xl">
+      <div className="w-full space-y-8 p-10">
+        <div className="flex flex-col items-center space-y-2">
+          <div className="border-secondary-500 relative h-32 w-32 overflow-hidden rounded-full border-[5px]">
             <Image src={profile.image} alt="" fill className="object-cover" />
           </div>
-          <h1 className="font-bold text-black pt-2 space-x-2 text-3xl">
+          <h1 className="space-x-2 pt-2 text-3xl font-bold text-black">
             <span>{profile.firstName}</span>
             <span>{profile.lastName}</span>
           </h1>
