@@ -1,7 +1,7 @@
-import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { BsLink } from "react-icons/bs";
 import Tab from "./components/Tab";
+import { Button } from "@/components/ui/button";
 
 export default function EditorLayout({
   children,
@@ -17,9 +17,7 @@ export default function EditorLayout({
         </div>
         <Tab />
         <Link href={`/${"sagar"}/preview`}>
-          <Button variant="bordered" radius="sm" size="lg">
-            Preview
-          </Button>
+          <Button>Preview</Button>
         </Link>
       </header>
       <section className="h-full">{children}</section>

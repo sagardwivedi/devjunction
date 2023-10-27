@@ -11,7 +11,7 @@ const CallToAction = () => {
         boring online presence, and ride the wave of spectacular tech networking
         with Linkmaster. Come, experience awesomeness!
       </p>
-      <div className="z-10 flex w-full md:w-fit flex-col md:flex-row flex-nowrap items-center justify-center gap-[10px] pt-[10px]">
+      <div className="z-10 flex w-full flex-col flex-nowrap items-center justify-center gap-[10px] pt-[10px] md:w-fit md:flex-row">
         <Button className="h-[40px] w-full rounded-lg bg-[#22333B] p-[15px] font-sans text-sm font-bold leading-[1.2em] text-white hover:bg-primary hover:text-black">
           Sign Up
         </Button>

@@ -4,15 +4,11 @@ import { useQueryState } from "next-usequerystate";
 import { BiLink } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
 
-import useTabStore from "@/hooks/tabContent";
-
 const Tabs = () => {
   const [tab, setTab] = useQueryState("tab");
-  const { setTabState } = useTabStore();
 
   const handleClick = (value: string) => {
     setTab(value);
-    setTabState(value);
   };
 
   const isSelected = tab === "link";

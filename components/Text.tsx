@@ -1,6 +1,6 @@
 const Text = () => {
   return (
-    <div className="h-auto w-full py-[60px] px-5 md:p-[100px] text-center">
+    <div className="h-auto w-full px-5 py-[60px] text-center md:p-[100px]">
       <div className="relative flex h-auto w-full flex-col justify-start gap-10 text-start">
         <h2 className="font-serif text-[48px] leading-[1.2em] text-primary">
           Dead-simple Solution
@@ -22,7 +22,7 @@ const Text = () => {
             away!
           </h3>
         </div>
-        <div className="absolute max-md:bottom-0 md:right-20 md:top-48 h-[345px] w-[344px] opacity-30">
+        <div className="absolute h-[345px] w-[344px] opacity-30 max-md:bottom-0 md:right-20 md:top-48">
           <div className="inset-y-[172px] h-px w-full bg-secondary" />
           <div className="bottom-[173px] top-[172px] h-px w-full rotate-[60deg] bg-secondary" />
           <div className="bottom-[173px] top-[172px] h-px w-full rotate-[30deg] bg-secondary" />

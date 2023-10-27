@@ -1,15 +1,9 @@
-import { useProfileStore } from "@/hooks/useProfileStore";
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ChangeEvent, useRef } from "react";
-import { PiImage } from "react-icons/pi";
 
 function ImageSelector() {
-  const { updateProfile, profile } = useProfileStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  console.log("Profile", profile.image);
 
   const openImageSelector = () => {
     if (fileInputRef.current) {
@@ -21,9 +15,6 @@ function ImageSelector() {
     const selectedFile = event.target.files && event.target.files[0];
 
     if (selectedFile) {
-      const imageUrl = URL.createObjectURL(selectedFile);
-      console.log("Image Link", imageUrl);
-      updateProfile({ image: imageUrl });
     }
   };
 
@@ -36,22 +27,6 @@ function ImageSelector() {
             className="relative h-[200px] w-[200px] cursor-pointer"
             onClick={openImageSelector}
           >
-            {profile.image ? (
-              <>
-                <Image
-                  src={profile.image}
-                  fill
-                  alt=""
-                  className="rounded-lg object-cover"
-                />
-                <div className="absolute flex h-full w-full flex-col items-center justify-center rounded-lg bg-black/30 text-white">
-                  <PiImage size={35} />
-                  <p>Change Image</p>
-                </div>
-              </>
-            ) : (
-              <div className="h-full w-full rounded-lg bg-gray-200" />
-            )}
             <input
               type="file"
               ref={fileInputRef}
@@ -71,32 +46,16 @@ function ImageSelector() {
 }
 
 function PersonalInfo() {
-  const { profile, updateProfile } = useProfileStore();
-
   return (
     <div className="bg-neutral-50 px-2 py-4">
       <div className="space-y-4">
         <div className="flex flex-row justify-between">
           <p className="text-neutral-500">First name*</p>
-          <Input
-            placeholder="Enter your first name"
-            className="w-[60%]"
-            variant="bordered"
-            radius="sm"
-            value={profile.firstName}
-            onChange={(e) => updateProfile({ firstName: e.target.value })}
-          />
+          <Input placeholder="Enter your first name" className="w-[60%]" />
         </div>
         <div className="flex flex-row justify-between">
           <p className="text-neutral-500">Last name*</p>
-          <Input
-            placeholder="Enter your last name"
-            className="w-[60%]"
-            variant="bordered"
-            radius="sm"
-            value={profile.lastName}
-            onChange={(e) => updateProfile({ lastName: e.target.value })}
-          />
+          <Input placeholder="Enter your last name" className="w-[60%]" />
         </div>
         <div className="flex flex-row justify-between">
           <p className="text-neutral-500">Email</p>
@@ -104,10 +63,6 @@ function PersonalInfo() {
             placeholder="Enter your email"
             type="email"
             className="w-[60%]"
-            variant="bordered"
-            radius="sm"
-            value={profile.email}
-            onChange={(e) => updateProfile({ email: e.target.value })}
           />
         </div>
       </div>
@@ -131,9 +86,7 @@ const ProfileTab = () => {
         </div>
         <div>
           <div className="mt-5 flex justify-end border-t border-neutral-300">
-            <Button className="mt-5" size="md" radius="sm">
-              Save
-            </Button>
+            <Button className="mt-5">Save</Button>
           </div>
         </div>
       </div>

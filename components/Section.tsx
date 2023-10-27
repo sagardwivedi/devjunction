@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const Section = () => {
   return (
-    <div className="flex h-auto w-full flex-col flex-nowrap items-center justify-start gap-[60px] max-md:py-[60px] max-md:px-5 md:gap-14 md:p-24">
-      <div className="relative flex h-auto w-full flex-col-reverse md:flex-row flex-nowrap items-center justify-center gap-14">
+    <div className="flex h-auto w-full flex-col flex-nowrap items-center justify-start gap-[60px] max-md:px-5 max-md:py-[60px] md:gap-14 md:p-24">
+      <div className="relative flex h-auto w-full flex-col-reverse flex-nowrap items-center justify-center gap-14 md:flex-row">
         <div className="relative z-10 h-[479px] w-full bg-blend-luminosity grayscale">
           <Image
             src={"/metalic.png"}
@@ -26,7 +26,7 @@ const Section = () => {
       </div>
 
       {/* 2nd */}
-      <div className="relative flex h-auto w-full flex-col md:flex-row flex-nowrap items-center justify-center gap-14">
+      <div className="relative flex h-auto w-full flex-col flex-nowrap items-center justify-center gap-14 md:flex-row">
         <div className="flex h-auto w-full flex-col items-start justify-center gap-5">
           <h3 className="max-w-[450px] text-start font-serif text-3xl leading-[1.2em] text-white">
             Tailor-made, eye-catching themes and URLs
