@@ -4,11 +4,13 @@ import LinkInput from "./LinkInput";
 
 const LinksForm = () => {
   return (
-    <div className="px-8 py-12">
+    <div className="md:px-8 px-4 py-6 md:py-12">
       <div className="space-y-5">
         <div className="space-y-5">
           <div className="space-y-3">
-            <h1 className="text-4xl font-bold">Customize your links</h1>
+            <h1 className="md:text-4xl text-2xl font-bold">
+              Customize your links
+            </h1>
             <p>
               Add/edit/remove links below and then share all your profiles with
               he world.

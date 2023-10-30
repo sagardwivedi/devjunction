@@ -34,7 +34,7 @@ export default function Tabs() {
             : "hover:bg-neutral-50/10 hover:text-white"
         )}
       >
-        <Link1Icon className="w-5 h-5" />
+        <Link1Icon className="w-5 h-5 md:w-6 md:h-6" />
         <span className="max-md:hidden">Link</span>
       </div>
       <div
@@ -46,7 +46,7 @@ export default function Tabs() {
             : "hover:bg-neutral-50/10 hover:text-white"
         )}
       >
-        <PersonIcon className="w-5 h-5" />
+        <PersonIcon className="w-5 h-5 md:w-6 md:h-6" />
         <span className="max-md:hidden">Profile Details</span>
       </div>
     </div>
