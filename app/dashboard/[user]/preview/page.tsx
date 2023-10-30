@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Platform } from "../editor/components/ShowContent";
+import { Platform } from "../../../../components/Editor/ShowContent";
 
 const Preview = () => {
   return (

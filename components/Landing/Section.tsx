@@ -22,7 +22,7 @@ const Section = () => {
             accessible by a single link!
           </h3>
         </div>
-        <div className="absolute -left-[300px] -top-5 bottom-[200px] right-[730px] z-0 h-[299px] w-[570px] rotate-[134deg] rounded-full border border-secondary opacity-30"></div>
+        <div className="border-secondary absolute -left-[300px] -top-5 bottom-[fullpx] right-[730px] z-0 h-[299px] w-[570px] rotate-[134deg] rounded-full border opacity-30"></div>
       </div>
 
       {/* 2nd */}
@@ -42,17 +42,17 @@ const Section = () => {
             src={"/ferris.png"}
             alt=""
             fill
-            className="rounded-b-200 rounded-tl-[40px] rounded-tr-200 object-cover "
+            className="rounded-b-full rounded-tl-[40px] rounded-tr-full object-cover "
           />
         </div>
 
         <div className="absolute right-0 top-0 z-0 h-[281px] w-[280px] opacity-30">
-          <div className="inset-y-[172px] h-px w-full bg-secondary" />
-          <div className="bottom-[173px] top-[172px] h-px w-full rotate-[60deg] bg-secondary" />
-          <div className="bottom-[173px] top-[172px] h-px w-full rotate-[30deg] bg-secondary" />
-          <div className="bottom-[173px] top-[172px] h-px w-full -rotate-[60deg] bg-secondary" />
-          <div className="bottom-[173px] top-[172px] h-px w-full -rotate-[30deg] bg-secondary" />
-          <div className="bottom-[173px] top-[172px] h-px w-full rotate-90 bg-secondary" />
+          <div className="inset-y-[172px] h-px w-full bg-neutral-400" />
+          <div className="bottom-[173px] top-[172px] h-px w-full rotate-[60deg] bg-neutral-400" />
+          <div className="bottom-[173px] top-[172px] h-px w-full rotate-[30deg] bg-neutral-400" />
+          <div className="bottom-[173px] top-[172px] h-px w-full -rotate-[60deg] bg-neutral-400" />
+          <div className="bottom-[173px] top-[172px] h-px w-full -rotate-[30deg] bg-neutral-400" />
+          <div className="bottom-[173px] top-[172px] h-px w-full rotate-90 bg-neutral-400" />
         </div>
       </div>
     </div>

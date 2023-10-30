@@ -1,8 +1,7 @@
-import CallToAction from "@/components/CallToAction";
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-import Section from "@/components/Section";
-import Text from "@/components/Text";
+import CallToAction from "@/components/Landing/CallToAction";
+import Hero from "@/components/Landing/Hero";
+import Section from "@/components/Landing/Section";
+import Text from "@/components/Landing/Text";
 
 const Home = () => {
   return (
@@ -11,7 +10,6 @@ const Home = () => {
       <Text />
       <Section />
       <CallToAction />
-      <Footer />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { Gloock, Manrope, Syne, Work_Sans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "DevLinks",
@@ -24,12 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background",
+          "min-h-screen bg-black text-white antialiased",
           manrope.variable,
           gloock.variable,
         )}
       >
-        {children}
+        <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   );

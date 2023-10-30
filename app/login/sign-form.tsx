@@ -1,92 +1,77 @@
 "use client";
 
+import { EnvelopeClosedIcon, LockOpen1Icon } from "@radix-ui/react-icons";
+import { useFormStatus } from "react-dom";
+
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { Label } from "@/components/ui/label";
 
-const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+export default function LoginForm() {
+  return (
+    <form action={"/auth/sign-in"} method="post" className="space-y-5">
+      <div>
+        <Label htmlFor="email">Email</Label>
+        <div className="flex px-2 rounded-lg border-white border-2 overflow-hidden flex-row-reverse mt-2 items-center">
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="user@gmail.com"
+            className="border-none focus-visible:ring-0"
+            required
+          />
+          <EnvelopeClosedIcon className="w-5 h-5" />
+        </div>
+      </div>
+      <div>
+        <Label htmlFor="password">Password</Label>
+        <div className="flex px-2 rounded-lg border-white border-2 overflow-hidden flex-row-reverse mt-2 items-center">
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="********"
+            className="border-none group focus-visible:ring-0"
+            minLength={8}
+            required
+          />
+          <LockOpen1Icon className="w-5 h-5" />
+        </div>
+      </div>
+      <div className="space-y-4">
+        <LoginButton />
+        <SignupButton />
+      </div>
+    </form>
+  );
+}
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .refine((value) => passwordPattern.test(value), {
-      message:
-        "Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character",
-    }),
-});
-
-export function SignInForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(JSON.stringify(values, null, 2));
-  }
+function LoginButton() {
+  const { pending } = useFormStatus();
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-[90%] max-w-md space-y-8"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="font-sans text-primary">Email</FormLabel>
-              <FormControl>
-                <Input placeholder="mine@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage className="font-sans" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="font-sans text-primary">Password</FormLabel>
-              <FormControl>
-                <Input placeholder="*******" type="password" {...field} />
-              </FormControl>
-              <FormMessage className="font-sans" />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-col  gap-y-4">
-          <Button
-            type="submit"
-            className="rounded-md bg-primary px-4 py-2 font-sans text-secondary hover:bg-secondary hover:text-black"
-          >
-            Log In
-          </Button>
-          <Button
-            type="submit"
-            className="rounded-md bg-primary px-4 py-2 font-sans text-secondary hover:bg-secondary hover:text-black"
-          >
-            Sign Up
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <Button
+      aria-disabled={pending}
+      variant={"secondary"}
+      className="px-4 py-2 w-full"
+    >
+      Log In
+    </Button>
+  );
+}
+
+function SignupButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      aria-disabled={pending}
+      variant={"outline"}
+      className="px-4 py-2 w-full"
+      formAction={"/auth/sign-up"}
+    >
+      Sign Up
+    </Button>
   );
 }

@@ -1,5 +1,6 @@
-import LinkInput from "./LinkInput";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import LinkInput from "./LinkInput";
 
 const LinksForm = () => {
   return (
@@ -7,17 +8,21 @@ const LinksForm = () => {
       <div className="space-y-5">
         <div className="space-y-5">
           <div className="space-y-3">
-            <h1 className="text-4xl font-bold text-neutral-800 ">
-              Customize your links
-            </h1>
+            <h1 className="text-4xl font-bold">Customize your links</h1>
             <p>
               Add/edit/remove links below and then share all your profiles with
               he world.
             </p>
           </div>
-          <Button>Add new link</Button>
+          <Button variant={"outline"} className="w-full">
+            Add new link
+          </Button>
         </div>
-        <div className="scrollbar-hide h-[420px] space-y-5 overflow-y-auto rounded-md will-change-scroll"></div>
+        <ScrollArea className="h-[420px]">
+          <LinkInput id={1} link="" />
+          <LinkInput id={2} link="" />
+          <LinkInput id={3} link="" />
+        </ScrollArea>
       </div>
       <div className="mt-5 flex justify-end border-t">
         <Button className="mt-5">Save</Button>
