@@ -24,7 +24,7 @@ export default function Tabs() {
   const isSelected = searchParams.get("tab")?.toString() === "link";
 
   return (
-    <div className="flex gap-x-5 text-white">
+    <div className="flex gap-x-2 md:gap-x-5 text-white">
       <div
         onClick={() => handleTab("link")}
         className={cn(

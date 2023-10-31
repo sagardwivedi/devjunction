@@ -1,9 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { object, string } from "zod";
-import { createClient } from "./supabase/serverClient";
+import { createClient } from "./supabase/server";
 
 type State = {
   errors?: {
@@ -58,4 +59,36 @@ export async function updateProfile(prevState: State, formData: FormData) {
     .single();
 
   redirect(`/dashboard/${data?.firstname}/editor`);
+}
+
+type StateL = {
+  errors?: {
+    platform?: string[];
+    link?: string[];
+  };
+  message?: string | null;
+};
+
+const LinkSchema = object({
+  platform: string(),
+  link: string().url(),
+});
+
+export async function createLinks(prevState: StateL, formData: FormData) {
+  console.log(Object.fromEntries(formData));
+
+  const validate = LinkSchema.safeParse({
+    platform: formData.get("Platform"),
+    link: formData.get("Link"),
+  });
+
+  if (!validate.success) {
+    return {
+      errors: validate.error.flatten().fieldErrors,
+      message: "Something went wrong",
+    };
+  }
+
+  revalidatePath("/dashboard/Sagar/editor");
+  redirect("/dashboard/Sagar/editor");
 }

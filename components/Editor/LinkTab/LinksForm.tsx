@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useLinkStore } from "@/hooks/useLinkStore";
 import LinkInput from "./LinkInput";
 
-const LinksForm = () => {
+export default function LinksForm() {
+  const { addLink, linkInputs } = useLinkStore();
+
   return (
     <div className="md:px-8 px-4 py-6 md:py-12">
       <div className="space-y-5">
@@ -16,21 +21,28 @@ const LinksForm = () => {
               he world.
             </p>
           </div>
-          <Button variant={"outline"} className="w-full">
+          <Button onClick={addLink} variant={"outline"} className="w-full">
             Add new link
           </Button>
         </div>
+
         <ScrollArea className="h-[420px]">
-          <LinkInput id={1} link="" />
-          <LinkInput id={2} link="" />
-          <LinkInput id={3} link="" />
+          {linkInputs.map((item) => (
+            <LinkInput key={item.id} id={item.id} link={item.link} />
+          ))}
         </ScrollArea>
-      </div>
-      <div className="mt-5 flex justify-end border-t">
-        <Button className="mt-5">Save</Button>
+        <div className="mt-5 flex justify-end border-t">
+          <SaveButton />
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default LinksForm;
+function SaveButton() {
+  return (
+    <Button className="mt-5" variant={"secondary"}>
+      Save
+    </Button>
+  );
+}
