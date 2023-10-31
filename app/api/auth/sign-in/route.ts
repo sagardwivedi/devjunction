@@ -13,7 +13,10 @@ export async function POST(request: Request) {
 
   const supabase = createClient(cookieStore);
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const {
+    error,
+    data: { user },
+  } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
@@ -27,7 +30,10 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.redirect(`${requestUrl.origin}/profile`, {
-    status: 301,
-  });
+  return NextResponse.redirect(
+    `${requestUrl.origin}/dashboard/${user?.id}/editor`,
+    {
+      status: 301,
+    }
+  );
 }

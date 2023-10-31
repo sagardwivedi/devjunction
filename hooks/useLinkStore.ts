@@ -1,70 +1,65 @@
 import { create } from "zustand";
 
-export type LinkInputType = {
+export type LinkComponent = {
   id: number;
-  link: string;
-  platform: string;
+  selectValue: string;
+  inputValue: string;
 };
 
-type LinkStore = {
-  linkInputs: LinkInputType[];
-  addLink: () => void;
-  removeLink: (id: number) => void;
-  moveLink: (id: number, direction: "up" | "down") => void;
-  updateLink: (
+type LinkFormStore = {
+  components: LinkComponent[];
+  addComponent: () => void;
+  removeComponent: (id: number) => void;
+  moveComponent: (id: number, direction: "up" | "down") => void;
+  updateComponent: (
     id: number,
-    property: "link" | "platform",
-    value: string
+    data: Partial<Omit<LinkComponent, "id">>
   ) => void;
+  setComponents: (components: LinkComponent[]) => void;
 };
 
-export const useLinkStore = create<LinkStore>((set) => ({
-  linkInputs: [{ id: 1, link: "", platform: "" }],
-  addLink: () => {
-    set((state) => ({
-      linkInputs: [
-        ...state.linkInputs,
-        { id: state.linkInputs.length + 1, link: "", platform: "" },
-      ],
-    }));
-  },
-  removeLink: (id) => {
-    set((state) => ({
-      linkInputs: state.linkInputs.filter((input) => input.id !== id),
-    }));
-  },
-  moveLink: (id, direction) => {
-    set((state) => {
-      // Find the current index
-      const currentIndex = state.linkInputs.findIndex(
-        (input) => input.id === id
-      );
-      // Find last index
-      const lastIndex = state.linkInputs.length - 1;
+export const useLinkFormStore = create<LinkFormStore>((set) => {
+  const initialState: LinkFormStore = {
+    components: [
+      { id: 1, inputValue: "", selectValue: "" },
+      { id: 2, inputValue: "", selectValue: "" },
+    ],
+    addComponent: () => {
+      set((state) => ({
+        components: [
+          ...state.components,
+          { id: state.components.length + 1, inputValue: "", selectValue: "" },
+        ],
+      }));
+    },
+    removeComponent: (id) => {
+      set((state) => ({
+        components: state.components.filter((item) => item.id !== id),
+      }));
+    },
+    moveComponent: (id, direction) => {
+      set((state) => {
+        const currentIndex = state.components.findIndex((c) => c.id === id);
+        const newIndex =
+          direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
-      if (direction === "up" && currentIndex > 0) {
-        const updatedInputs = [...state.linkInputs];
-        [updatedInputs[currentIndex], updatedInputs[currentIndex - 1]] = [
-          updatedInputs[currentIndex - 1],
-          updatedInputs[currentIndex],
+        const components = [...state.components];
+        [components[currentIndex], components[newIndex]] = [
+          components[newIndex],
+          components[currentIndex],
         ];
-        return { linkInputs: updatedInputs };
-      } else if (direction === "down" && currentIndex < lastIndex) {
-        const updateInputs = [...state.linkInputs];
-        [updateInputs[currentIndex], updateInputs[currentIndex + 1]] = [
-          updateInputs[currentIndex + 1],
-          updateInputs[currentIndex],
-        ];
-        return { linkInputs: updateInputs };
-      }
-      return state;
-    });
-  },
-  updateLink: (id, property, value) => {
-    set((state) => ({
-      linkInputs: state.linkInputs.map((input) =>
-        input.id === id ? { ...input, [property]: value } : input
-      ),
-    }));
-  },
-}));
+
+        return { components };
+      });
+    },
+    setComponents: (components) => set({ components }),
+    updateComponent: (id, data) =>
+      set((state) => ({
+        components: state.components.map((c) =>
+          c.id === id ? { ...c, ...data } : c
+        ),
+      })),
+  };
+
+  return initialState;
+});
