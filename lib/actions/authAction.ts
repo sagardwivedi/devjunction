@@ -85,7 +85,7 @@ export async function signupAction(prevState: State, formData: FormData) {
     password,
     options: {
       data: { firstname: firstname, lastname: lastname },
-      emailRedirectTo: `${origin}/auth/callback`,
+      emailRedirectTo: `${location.origin}/auth/callback`,
     },
   });
 
