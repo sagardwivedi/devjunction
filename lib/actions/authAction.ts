@@ -61,6 +61,8 @@ export async function loginAction(prevState: State, formData: FormData) {
 }
 
 export async function signupAction(prevState: State, formData: FormData) {
+  const origin = headers().get("origin");
+
   const validate = AuthSchema.safeParse({
     firstname: formData.get("firstName"),
     lastname: formData.get("lastName"),
@@ -78,14 +80,13 @@ export async function signupAction(prevState: State, formData: FormData) {
   const { email, firstname, lastname, password } = validate.data;
 
   const supabase = createClient(cookies());
-  const origin = headers().get("origin");
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: { firstname: firstname, lastname: lastname },
-      emailRedirectTo: `${location.origin}/auth/callback`,
+      emailRedirectTo: `${origin}/auth/callback`,
     },
   });
 
