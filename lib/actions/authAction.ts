@@ -1,9 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { object, string } from "zod";
-import { createClient } from "../supabase/serverClient";
+
+import { createClient } from "@/lib/supabase/serverClient";
 
 type State = {
   errors?: {
@@ -61,10 +62,7 @@ export async function loginAction(prevState: State, formData: FormData) {
 }
 
 export async function signupAction(prevState: State, formData: FormData) {
-  const originUrl =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://devjunction.vercel.app/";
+  const origin = headers().get("origin");
 
   const validate = AuthSchema.safeParse({
     firstname: formData.get("firstName"),
@@ -89,12 +87,13 @@ export async function signupAction(prevState: State, formData: FormData) {
     password,
     options: {
       data: { firstname: firstname, lastname: lastname },
-      emailRedirectTo: `${originUrl}/auth/callback`,
+      emailRedirectTo: `${origin}/auth/callback`,
     },
   });
 
   if (error) {
     return { message: "Could not authenticate user" };
+  } else {
   }
 
   return { message: "Check email to continue sign in process" };
