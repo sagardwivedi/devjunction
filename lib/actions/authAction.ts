@@ -61,6 +61,11 @@ export async function loginAction(prevState: State, formData: FormData) {
 }
 
 export async function signupAction(prevState: State, formData: FormData) {
+  const originUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://devjunction.vercel.app/";
+
   const validate = AuthSchema.safeParse({
     firstname: formData.get("firstName"),
     lastname: formData.get("lastName"),
@@ -84,7 +89,7 @@ export async function signupAction(prevState: State, formData: FormData) {
     password,
     options: {
       data: { firstname: firstname, lastname: lastname },
-      emailRedirectTo: `${url}/auth/callback`,
+      emailRedirectTo: `${originUrl}/auth/callback`,
     },
   });
 
