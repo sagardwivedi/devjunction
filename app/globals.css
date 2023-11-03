@@ -5,24 +5,32 @@
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
-    scroll-behavior: smooth;
   }
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .button-primary {
-    background-color: transparent;
-    border: 1px solid theme(colors.white);
-  }
-
-  .button-primary:hover {
-    background-color: theme(colors.white);
-    color: theme(colors.black);
+@layer components {
+  .landing-img {
+    @apply h-[143px] w-full rounded-bl-full rounded-tl-full rounded-tr-full object-cover bg-blend-luminosity grayscale;
   }
 }
 
 .animate-in {
   animation: animateIn 0.3s ease 0.15s both;
+}
+
+.animate-out {
+  animation: animateOut 0.3s ease 0.15s both;
+}
+
+@keyframes animateOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 
 @keyframes animateIn {
