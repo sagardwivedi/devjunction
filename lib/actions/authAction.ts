@@ -4,6 +4,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { object, string } from "zod";
 import { createClient } from "../supabase/serverClient";
+import { getURL } from "../utils";
 
 type State = {
   errors?: {
@@ -86,7 +87,7 @@ export async function signupAction(prevState: State, formData: FormData) {
     password,
     options: {
       data: { firstname: firstname, lastname: lastname },
-      emailRedirectTo: `${origin}/auth/callback`,
+      emailRedirectTo: `${getURL()}/auth/callback`,
     },
   });
 
