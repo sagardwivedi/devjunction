@@ -3,7 +3,8 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { object, string } from "zod";
-import { createClient } from "../supabase/serverClient";
+
+import { createClient } from "@/lib/supabase/serverClient";
 
 type State = {
   errors?: {
@@ -92,6 +93,7 @@ export async function signupAction(prevState: State, formData: FormData) {
 
   if (error) {
     return { message: "Could not authenticate user" };
+  } else {
   }
 
   return { message: "Check email to continue sign in process" };
