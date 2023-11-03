@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { object, string } from "zod";
 import { createClient } from "../supabase/serverClient";
@@ -57,7 +57,7 @@ export async function loginAction(prevState: State, formData: FormData) {
     firstname: string;
   };
 
-  redirect(`/l/${firstname.toLowerCase()}/editor`);
+  redirect(`/l/${firstname.toLowerCase()}`);
 }
 
 export async function signupAction(prevState: State, formData: FormData) {
@@ -78,13 +78,14 @@ export async function signupAction(prevState: State, formData: FormData) {
   const { email, firstname, lastname, password } = validate.data;
 
   const supabase = createClient(cookies());
+  const origin = headers().get("origin");
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: { firstname: firstname, lastname: lastname },
-      emailRedirectTo: "/auth/callback",
+      emailRedirectTo: `${origin}/auth/callback`,
     },
   });
 
