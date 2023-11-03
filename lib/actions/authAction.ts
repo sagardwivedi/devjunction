@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { object, string } from "zod";
-import { createClient } from "../supabase/server";
+import { createClient } from "../supabase/serverClient";
 
 type State = {
   errors?: {
