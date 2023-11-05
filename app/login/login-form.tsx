@@ -2,6 +2,7 @@
 
 import { loginAction } from "@/lib/actions/authAction";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
@@ -11,51 +12,57 @@ export function LoginForm() {
   const [state, action] = useFormState(loginAction, initialState);
 
   return (
-    <form action={action} className="space-y-3">
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="Email"
-          id="email"
-          className={`mt-2 w-full rounded-md border border-gray-300 bg-transparent p-2 focus:outline-none ${
-            state.errors?.email ? "border-red-500" : ""
-          }`}
-        />
-        {state.errors?.email && (
-          <div>
-            {state.errors.email.map((error) => (
-              <p key={error} className="text-red-500">
-                {error}
-              </p>
-            ))}
-          </div>
-        )}
+    <form action={action} className="space-y-8">
+      <div className="space-y-4">
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="Email"
+            id="email"
+            className={`mt-2 w-full rounded-md border border-gray-300 bg-transparent p-2 focus:outline-none ${
+              state.errors?.email ? "border-red-500" : ""
+            }`}
+          />
+          {state.errors?.email && (
+            <div>
+              {state.errors.email.map((error) => (
+                <p key={error} className="text-red-500">
+                  {error}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="Password"
+            id="password"
+            className={`mt-2 w-full rounded-md border border-gray-300 bg-transparent p-2 focus:outline-none ${
+              state.errors?.password ? "border-red-500" : ""
+            }`}
+          />
+          {state.errors?.password && (
+            <div>
+              {state.errors.password.map((error) => (
+                <p key={error} className="text-red-500">
+                  {error}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {state.message ? <p>{state.message}</p> : null}
       </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="Password"
-          id="password"
-          className={`mt-2 w-full rounded-md border border-gray-300 bg-transparent p-2 focus:outline-none ${
-            state.errors?.password ? "border-red-500" : ""
-          }`}
-        />
-        {state.errors?.password && (
-          <div>
-            {state.errors.password.map((error) => (
-              <p key={error} className="text-red-500">
-                {error}
-              </p>
-            ))}
-          </div>
-        )}
-      </div>
-      {state.message ? <p>{state.message}</p> : null}
-      <div className="flex w-full flex-col items-center gap-3">
-        <SaveButton />
-        <SignUpButton />
+      <SaveButton />
+      <div className="flex flex-row gap-x-2 justify-center">
+        <p>Aleadry have an account?</p>
+        <Link href={"/signup"} className="text-blue-500 hover:underline">
+          Signup
+        </Link>
       </div>
     </form>
   );

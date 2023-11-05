@@ -13,12 +13,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (session && request.nextUrl.pathname === "/l") {
-    return NextResponse.redirect(
-      new URL(`/l/${session.user.user_metadata.firstname}`, request.url)
-    );
-  }
-
   return response;
 }
 

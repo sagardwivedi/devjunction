@@ -58,7 +58,7 @@ export async function loginAction(prevState: State, formData: FormData) {
     firstname: string;
   };
 
-  redirect(`/l/${firstname.toLowerCase()}`);
+  redirect(`/l/${firstname}`);
 }
 
 export async function signupAction(prevState: State, formData: FormData) {
@@ -93,7 +93,6 @@ export async function signupAction(prevState: State, formData: FormData) {
 
   if (error) {
     return { message: "Could not authenticate user" };
-  } else {
   }
 
   return { message: "Check email to continue sign in process" };

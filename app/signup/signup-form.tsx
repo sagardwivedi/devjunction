@@ -4,6 +4,7 @@ import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import { useFormState, useFormStatus } from "react-dom";
 
 import { signupAction } from "@/lib/actions/authAction";
+import Link from "next/link";
 
 export function SignupForm() {
   const initialState = { message: null, errors: {} };
@@ -98,6 +99,12 @@ export function SignupForm() {
         {state.message ? <p>{state.message}</p> : null}
       </div>
       <SignUpButton />
+      <div className="flex flex-row gap-x-2 justify-center">
+        <p>Aleadry have an account?</p>
+        <Link href={"/login"} className="text-blue-500 hover:underline">
+          Login
+        </Link>
+      </div>
     </form>
   );
 }
@@ -107,7 +114,8 @@ function SignUpButton() {
   return (
     <button
       aria-disabled={pending}
-      className="flex w-full  items-center justify-center gap-x-2 rounded-lg  bg-white p-2 text-black transition-all hover:bg-white hover:text-black active:opacity-50"
+      disabled={pending}
+      className="flex w-full items-center justify-center gap-x-2 rounded-lg  bg-white p-2 text-black transition-all hover:bg-white hover:text-black active:opacity-50"
     >
       {pending ? <ArrowPathIcon className="h-5 w-5 animate-spin" /> : null}
       Sign up
