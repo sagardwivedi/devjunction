@@ -1,4 +1,4 @@
-import DevLinksLogo from "@/components/DevLinksLogo";
+import { DevLinksLogo } from "@/components/DevLinksLogo";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,10 +14,10 @@ export default function Home() {
           </h1>
           <Link
             href={"/login"}
-            className="flex flex-row items-center gap-x-2 rounded-full bg-white p-2 text-lg text-black"
+            className="group flex flex-row items-center gap-x-2 rounded-full bg-white px-4 py-2 text-lg text-black"
           >
             <p className="font-sans">Get Started</p>
-            <ArrowRightIcon className="h-5 w-5" />
+            <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
         <div className="grid w-full grid-cols-3 grid-rows-3 gap-5 overflow-hidden">

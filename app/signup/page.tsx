@@ -1,4 +1,4 @@
-import DevLinksLogo from "@/components/DevLinksLogo";
+import { DevLinksLogo } from "@/components/DevLinksLogo";
 import { SignupForm } from "./signup-form";
 
 export default function Signup() {

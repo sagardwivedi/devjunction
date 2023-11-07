@@ -1,18 +1,17 @@
 "use client";
 
-import { loginAction } from "@/lib/actions/authAction";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
-
-import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
+
+import { loginAction } from "@/lib/actions/authAction";
 
 export function LoginForm() {
   const initialState = { message: null, error: {} };
   const [state, action] = useFormState(loginAction, initialState);
 
   return (
-    <form action={action} className="space-y-8">
+    <form action={action} className="space-y-8 animate-in">
       <div className="space-y-4">
         <div>
           <label htmlFor="email">Email</label>
@@ -58,7 +57,7 @@ export function LoginForm() {
         {state.message ? <p>{state.message}</p> : null}
       </div>
       <SaveButton />
-      <div className="flex flex-row gap-x-2 justify-center">
+      <div className="flex flex-row justify-center gap-x-2">
         <p>Aleadry have an account?</p>
         <Link href={"/signup"} className="text-blue-500 hover:underline">
           Signup
@@ -73,23 +72,13 @@ function SaveButton() {
   return (
     <button
       aria-disabled={pending}
-      className="flex w-full items-center justify-center gap-x-2 rounded-lg  bg-white p-2 text-black transition-all hover:bg-white hover:text-black active:opacity-50"
+      disabled={pending}
+      className={`flex w-full items-center ${
+        pending ? "bg-white/50" : "bg-white"
+      } justify-center gap-x-2 rounded-lg p-2 text-black transition-all hover:bg-white hover:text-black active:opacity-50`}
     >
       {pending ? <ArrowPathIcon className="h-5 w-5 animate-spin" /> : null}
       Log in
-    </button>
-  );
-}
-
-function SignUpButton() {
-  const { push } = useRouter();
-  return (
-    <button
-      type="button"
-      onClick={() => push("/signup")}
-      className="flex w-full items-center justify-center gap-x-2 rounded-lg border border-white p-2 transition-all hover:bg-white hover:text-black active:opacity-50"
-    >
-      Sign Up
     </button>
   );
 }

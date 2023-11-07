@@ -99,7 +99,7 @@ export function SignupForm() {
         {state.message ? <p>{state.message}</p> : null}
       </div>
       <SignUpButton />
-      <div className="flex flex-row gap-x-2 justify-center">
+      <div className="flex flex-row justify-center gap-x-2">
         <p>Aleadry have an account?</p>
         <Link href={"/login"} className="text-blue-500 hover:underline">
           Login
