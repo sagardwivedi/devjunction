@@ -8,7 +8,7 @@ import { linksSaveAction } from "@/lib/actions/crudAction";
 import { InputLink } from "./InputLink";
 
 export function LinkForm() {
-  const initialState = { errors: {}, message: null };
+  const initialState = { errors: {}, message: "" };
   const [state, action] = useFormState(linksSaveAction, initialState);
 
   const { inputFields, removeInputField, addInputField } = useMultipleInput([

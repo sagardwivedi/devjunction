@@ -7,7 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { loginAction } from "@/lib/actions/authAction";
 
 export function LoginForm() {
-  const initialState = { message: null, error: {} };
+  const initialState = { message: "", error: {} };
   const [state, action] = useFormState(loginAction, initialState);
 
   return (

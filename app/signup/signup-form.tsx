@@ -7,7 +7,7 @@ import { signupAction } from "@/lib/actions/authAction";
 import Link from "next/link";
 
 export function SignupForm() {
-  const initialState = { message: null, errors: {} };
+  const initialState = { message: "", errors: {} };
   const [state, action] = useFormState(signupAction, initialState);
 
   return (
