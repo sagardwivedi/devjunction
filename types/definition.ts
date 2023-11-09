@@ -6,7 +6,7 @@ export interface UserProfile {
   socialMedia: Link[];
 }
 
-interface Link {
+export interface Link {
   id: number;
   link: string;
   platform: string;

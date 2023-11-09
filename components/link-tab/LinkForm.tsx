@@ -1,11 +1,16 @@
 "use client";
 
-import { useMultipleInput } from "@/hooks/use-multiple-input";
 import { PlusIcon } from "@heroicons/react/20/solid";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+
+import { useMultipleInput } from "@/hooks/use-multiple-input";
+import { linksSaveAction } from "@/lib/actions/crudAction";
 import { InputLink } from "./InputLink";
 
 export function LinkForm() {
+  const initialState = { errors: {}, message: null };
+  const [state, action] = useFormState(linksSaveAction, initialState);
+
   const { inputFields, removeInputField, addInputField } = useMultipleInput([
     { id: 1, link: "", platform: "" },
     { id: 2, link: "", platform: "" },
@@ -30,16 +35,22 @@ export function LinkForm() {
           <PlusIcon className="h-6 w-6" />
           Add new link
         </button>
-        <form>
+
+        <form action={action}>
           <div className="h-[400px] overflow-y-auto will-change-scroll">
-            {inputFields.map((item) => (
-              <InputLink
-                id={item.id}
-                key={item.id}
-                onRemove={removeInputField}
-              />
-            ))}
+            {inputFields.map((item) => {
+              return (
+                <>
+                  <InputLink
+                    id={item.id}
+                    key={item.id}
+                    onRemove={removeInputField}
+                  />
+                </>
+              );
+            })}
           </div>
+
           <SaveButton />
         </form>
       </div>
@@ -51,8 +62,13 @@ function SaveButton() {
   const { pending } = useFormStatus();
 
   return (
-    <div>
-      <button disabled={pending}>Save</button>
+    <div className="mt-5 flex justify-end border-t border-white pt-5">
+      <button
+        className="rounded-md bg-white px-5 py-2 text-black"
+        disabled={pending}
+      >
+        Save
+      </button>
     </div>
   );
 }

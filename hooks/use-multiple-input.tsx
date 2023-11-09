@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 
-interface InputType {
-  id: number;
-  link: string;
-  platform: string;
-}
+import { Link } from "@/types/definition";
+
+type Direction = "up" | "down";
 
 export function useMultipleInput(
-  initialFields: InputType[] = [{ id: 1, link: "", platform: "" }],
+  initialFields: Link[] = [{ id: 1, link: "", platform: "" }],
 ) {
   const [inputFields, setInputFields] = useState(initialFields);
 
@@ -23,7 +21,7 @@ export function useMultipleInput(
     setInputFields(inputFields.filter((field) => field.id !== id));
   };
 
-  const moveInputField = (id: number, direction: "up" | "down") => {
+  const moveInputField = (id: number, direction: Direction) => {
     const currentIndex = inputFields.findIndex((field) => field.id === id);
     if (currentIndex === -1) return;
 
