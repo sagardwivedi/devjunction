@@ -8,8 +8,9 @@ export function InputLink({
 }: {
   id: number;
   onRemove: (id: number) => void;
-  errorLink?: string;
-  errorPlatform?: string;
+  errorLink?: string[];
+  errorPlatform?: string[];
+  message?: string;
 }) {
   return (
     <div className="mb-4 rounded-md bg-slate-800 p-4 shadow-md">
@@ -41,7 +42,7 @@ export function InputLink({
       <div className="mb-4 space-y-2">
         <div>
           <label
-            htmlFor="platform"
+            htmlFor={`platform-${id}`}
             className="block font-semibold text-gray-700"
           >
             Platform
@@ -56,14 +57,18 @@ export function InputLink({
           </select>
           <p>{errorPlatform}</p>
         </div>
+
         <div>
-          <label htmlFor={`link`} className="block font-semibold text-gray-700">
+          <label
+            htmlFor={`link-${id}`}
+            className="block font-semibold text-gray-700"
+          >
             Link
           </label>
           <input
             type="url"
-            name="Link"
-            id={`link`}
+            name={`Link-${id}`}
+            id={`link-${id}`}
             placeholder="Platform link"
             className={`w-full rounded-md bg-transparent p-2 ${
               errorLink ? "border-red-500" : ""

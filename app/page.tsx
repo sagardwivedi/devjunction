@@ -1,7 +1,8 @@
-import { DevLinksLogo } from "@/components/DevLinksLogo";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
+
+import { DevLinksLogo } from "@/components/DevLinksLogo";
 
 export default function Home() {
   return (

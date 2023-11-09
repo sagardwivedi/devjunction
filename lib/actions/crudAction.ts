@@ -1,60 +1,48 @@
-"use server"; // Assuming this directive is valid in your project setup
+"use server";
 
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { object, string } from "zod";
-
+import { array, object, string } from "zod";
 import { getUserId } from "../data";
 import { createClient } from "../supabase/serverClient";
 
-export type State = {
-  errors?: { link?: string[]; platform?: string[] };
-  message?: string | null;
-};
-
-const LinkSchema = object({
-  id: string().array(),
-  link: string().url().array(),
-  platform: string().array(),
+const linkSchema = object({
+  id: string(),
+  links: string().url(),
+  platform: string(),
 });
 
-const SaveSchema = LinkSchema;
+const linksArraySchema = array(linkSchema);
 
-export async function linksSaveAction(prevState: State, formData: FormData) {
-  const { id, name } = await getUserId();
+export async function linksSaveAction(prevState: any, formData: FormData) {
+  const ids = Array.from(formData.getAll("Id"));
 
-  const validate = SaveSchema.safeParse({
-    id: formData.getAll("Id"),
-    link: formData.getAll("Link"),
-    platform: formData.getAll("Platform"),
-  });
+  const rawData = ids.map((id) => ({
+    id,
+    links: String(formData.get(`Link-${id}`)) || "",
+    platform: String(formData.get(`Platform-${id}`)) || "",
+  }));
 
-  if (!validate.success) {
+  const validation = linksArraySchema.safeParse(rawData);
+
+  if (!validation.success) {
     return {
-      errors: validate.error.flatten().fieldErrors,
-      message: "Fix errors",
+      errors: validation.error.flatten().fieldErrors,
+      message: validation.error.flatten().formErrors,
     };
   }
 
-  // Successful validation
-  const links = validate.data.link.map((link, index) => ({
-    link,
-    platform: validate.data.platform[index],
+  const { id } = await getUserId();
+  const supabase = createClient(cookies());
+  const links = rawData.map((data) => ({
+    link: data.links,
+    platform: data.platform,
     user_id: id || "",
   }));
 
-  const supabase = createClient(cookies());
   const { error } = await supabase.from("social_media_links").insert(links);
-
   if (error) {
     return {
       message: error.message,
-      errors: {}, // Clear any previous errors if necessary
     };
   }
-
-  // Perform revalidation and redirection
-  revalidatePath(`/l/${name}/editor`);
-  redirect(`/l/${name}/editor`);
 }

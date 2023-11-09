@@ -1,11 +1,23 @@
 import "server-only";
-import { createClient } from "./supabase/serverClient";
+
 import { cookies } from "next/headers";
+
+import { createClient } from "./supabase/serverClient";
 
 export async function getUserId() {
   const supabase = createClient(cookies());
   const { data } = await supabase.auth.getUser();
-  const id = data.user?.id;
-  const { firstname } = data.user?.user_metadata as { firstname: string };
-  return { id, name: firstname };
+
+  if (data.user) {
+    const id = data.user.id;
+    const userMetadata = data.user.user_metadata;
+
+    if (userMetadata) {
+      const { firstname } = userMetadata as { firstname: string };
+      return { id, name: firstname };
+    }
+  }
+
+  // Handle the case when user or user_metadata is undefined
+  return { id: null, name: null };
 }

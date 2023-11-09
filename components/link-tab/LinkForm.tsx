@@ -8,8 +8,7 @@ import { linksSaveAction } from "@/lib/actions/crudAction";
 import { InputLink } from "./InputLink";
 
 export function LinkForm() {
-  const initialState = { errors: {}, message: "" };
-  const [state, action] = useFormState(linksSaveAction, initialState);
+  const [state, action] = useFormState(linksSaveAction, null);
 
   const { inputFields, removeInputField, addInputField } = useMultipleInput([
     { id: 1, link: "", platform: "" },
@@ -17,7 +16,7 @@ export function LinkForm() {
   ]);
 
   return (
-    <div className="px-10 py-8">
+    <div className="px-5 md:px-8 py-4 md:py-8">
       <div className="space-y-8">
         <div>
           <h1 className="text-xl font-semibold md:text-6xl">
@@ -39,14 +38,15 @@ export function LinkForm() {
         <form action={action}>
           <div className="h-[400px] overflow-y-auto will-change-scroll">
             {inputFields.map((item) => {
+              const linkError = state?.errors?.[item.id - 1];
+
               return (
-                <>
-                  <InputLink
-                    id={item.id}
-                    key={item.id}
-                    onRemove={removeInputField}
-                  />
-                </>
+                <InputLink
+                  id={item.id}
+                  key={item.id}
+                  onRemove={removeInputField}
+                  errorLink={linkError}
+                />
               );
             })}
           </div>

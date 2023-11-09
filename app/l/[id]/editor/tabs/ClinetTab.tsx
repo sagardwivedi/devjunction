@@ -16,7 +16,7 @@ export function ClinetTab({ tab }: { tab: string }) {
   }
 
   return (
-    <div className="flex flex-row items-center gap-x-10">
+    <div className="flex flex-row items-center gap-x-3 md:gap-x-10">
       <button
         onClick={() => handleClick("link")}
         className={`flex flex-row items-center gap-x-2 rounded-md px-4 py-2 hover:bg-gray-100/5 ${
@@ -24,7 +24,7 @@ export function ClinetTab({ tab }: { tab: string }) {
         }`}
       >
         <LinkIcon className="h-6 w-6" />
-        Links
+        <p className="max-md:hidden">Links</p>
       </button>
       <button
         onClick={() => handleClick("profile")}
@@ -33,7 +33,7 @@ export function ClinetTab({ tab }: { tab: string }) {
         }`}
       >
         <UserCircleIcon className="h-6 w-6" />
-        Profile Details
+        <p className="max-md:hidden">Profile Details</p>
       </button>
     </div>
   );
