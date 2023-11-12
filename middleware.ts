@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/middlewareClinet";
 
 export async function middleware(request: NextRequest) {
-  const { supabase, response } = createClient(request);
+  const { response, supabase } = createClient(request);
 
   const {
     data: { session },
@@ -11,12 +11,6 @@ export async function middleware(request: NextRequest) {
 
   if (!session) {
     return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  if (session && request.nextUrl.pathname === "/login") {
-    return NextResponse.redirect(
-      new URL(`/l/${session.user.user_metadata.firstname}`, request.url),
-    );
   }
 
   return response;

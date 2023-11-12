@@ -6,7 +6,7 @@ import { DevLinksLogo } from "@/components/DevLinksLogo";
 
 export default function Home() {
   return (
-    <div className="p-5 animate-in md:p-16 lg:p-24">
+    <div className="p-5 animate-in md:p-20 lg:p-28">
       <div className="flex h-auto w-full flex-col flex-nowrap items-center justify-center gap-[60px] lg:flex-row">
         <div className="flex h-auto w-full max-w-[800px] flex-col flex-nowrap items-center justify-center gap-5 md:items-start">
           <DevLinksLogo />
@@ -15,7 +15,7 @@ export default function Home() {
           </h1>
           <Link
             href={"/login"}
-            className="group flex flex-row items-center gap-x-2 rounded-full bg-white px-4 py-2 text-lg text-black"
+            className="group flex flex-row items-center gap-x-2 rounded-full bg-black px-4 py-2 text-lg text-white"
           >
             <p className="font-sans">Get Started</p>
             <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />

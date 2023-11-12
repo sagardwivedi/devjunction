@@ -1,1 +1,4 @@
-export const PlatformOptions = [{ value: "Github" }, { value: "Gitlab" }];
+export const PlatformOptions = [
+  { value: "Github" },
+  { value: "Stack Overflow" },
+];

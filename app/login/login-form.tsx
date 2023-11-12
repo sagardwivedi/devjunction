@@ -74,8 +74,8 @@ function SaveButton() {
       aria-disabled={pending}
       disabled={pending}
       className={`flex w-full items-center ${
-        pending ? "bg-white/50" : "bg-white"
-      } justify-center gap-x-2 rounded-lg p-2 text-black transition-all hover:bg-white hover:text-black active:opacity-50`}
+        pending ? "bg-white/50" : "bg-white hover:bg-white"
+      } justify-center gap-x-2 rounded-lg p-2 text-black transition-all active:opacity-50`}
     >
       {pending ? <ArrowPathIcon className="h-5 w-5 animate-spin" /> : null}
       Log in

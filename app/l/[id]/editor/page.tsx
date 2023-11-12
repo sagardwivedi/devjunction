@@ -11,7 +11,7 @@ export default function Editor({
   const tab = searchParams?.tab || "link";
 
   return (
-    <div className="p-6">
+    <div className="p-2 md:p-6">
       <div className="space-y-5">
         <EditorHeader id={params.id} tab={tab} />
         <TabContent tab={tab} />

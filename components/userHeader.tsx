@@ -16,7 +16,7 @@ export function UserHeader({ id }: { id: string }) {
   };
 
   return (
-    <header className="w-full rounded-md border border-gray-800 bg-neutral-900 py-4">
+    <header className="w-full rounded-md bg-white py-4">
       <div className="flex flex-row items-center justify-between px-5">
         <DevLinksLogo />
         <Link

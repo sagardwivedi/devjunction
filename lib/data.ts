@@ -18,6 +18,54 @@ export async function getUserId() {
     }
   }
 
-  // Handle the case when user or user_metadata is undefined
   return { id: null, name: null };
+}
+
+export async function getUserData() {
+  const supabase = createClient(cookies());
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    const id = user.id;
+
+    const { data } = await supabase
+      .from("profiles")
+      .select("firstname, lastname, email, avatar_url")
+      .eq("id", id)
+      .single();
+
+    const userData = {
+      firstname: data?.firstname || "",
+      lastname: data?.lastname || "",
+      email: data?.email || "",
+      avatar_url: data?.avatar_url || "",
+    };
+
+    return { user: userData };
+  }
+
+  return { user: null };
+}
+
+export async function getUserSocial() {
+  const supabase = createClient(cookies());
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    const userId = user.id;
+
+    const { data: socialLinks } = await supabase
+      .from("social_media_links")
+      .select("link, platform")
+      .eq("user_id", userId);
+
+    return { social: socialLinks || [] };
+  }
+
+  return { social: null };
 }

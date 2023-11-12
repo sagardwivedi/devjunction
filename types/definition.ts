@@ -1,8 +1,11 @@
 export interface UserProfile {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
-  avatarUrl: string;
+  avatar_url: string;
+}
+
+export interface UserProfileSocial extends UserProfile {
   socialMedia: Link[];
 }
 

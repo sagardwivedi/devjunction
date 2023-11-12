@@ -1,45 +1,24 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import { RemoveButton } from "../butons";
 
 export function InputLink({
   id,
-  onRemove,
   errorLink,
   errorPlatform,
 }: {
   id: number;
-  onRemove: (id: number) => void;
-  errorLink?: string[];
-  errorPlatform?: string[];
-  message?: string;
+  errorLink?: string;
+  errorPlatform?: string;
 }) {
   return (
-    <div className="mb-4 rounded-md bg-slate-800 p-4 shadow-md">
+    <div className="mb-4 rounded-md bg-gray-50 p-4">
       <input type="hidden" name="Id" value={id} />
       <div className="mb-4 flex flex-row items-center justify-between">
         <div className="flex items-center space-x-2">
           <p className="text-sm font-semibold">Link #{id}</p>
-          <button
-            type="button"
-            disabled={id === 1}
-            className={`${
-              id === 1 ? "cursor-not-allowed" : ""
-            } rounded-md p-2 text-white`}
-          >
-            <ArrowUpIcon className="h-5 w-5" />
-          </button>
-          <button
-            disabled={id === 1}
-            type="button"
-            className={`${
-              id === 1 ? "cursor-not-allowed" : ""
-            } rounded-md p-2 text-white`}
-          >
-            <ArrowDownIcon className="h-5 w-5" />
-          </button>
         </div>
-        <button onClick={() => onRemove(id)}>Remove</button>
+        <RemoveButton id={id} />
       </div>
-      <div className="mb-4 space-y-2">
+      <div className="mb-4 bg-gray-100 p-2 rounded-md space-y-2">
         <div>
           <label
             htmlFor={`platform-${id}`}
@@ -48,12 +27,12 @@ export function InputLink({
             Platform
           </label>
           <select
-            name="Platform"
-            id="platform"
+            name={`Platform-${id}`}
+            id={`platform-${id}`}
             className="w-full rounded-md bg-transparent p-2"
           >
-            <option value="github">Github</option>
-            {/* Add more platform options as needed */}
+            <option value="Github">Github</option>
+            <option value="Stack Overflow">Stack Overflow</option>
           </select>
           <p>{errorPlatform}</p>
         </div>
