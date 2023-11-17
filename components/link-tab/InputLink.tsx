@@ -1,11 +1,17 @@
 import { RemoveButton } from "../butons";
+import { Input } from "./Input";
+import { Select } from "./Select";
 
 export function InputLink({
   id,
   errorLink,
   errorPlatform,
+  link,
+  platform,
 }: {
   id: number;
+  link: string;
+  platform: string;
   errorLink?: string;
   errorPlatform?: string;
 }) {
@@ -18,43 +24,9 @@ export function InputLink({
         </div>
         <RemoveButton id={id} />
       </div>
-      <div className="mb-4 bg-gray-100 p-2 rounded-md space-y-2">
-        <div>
-          <label
-            htmlFor={`platform-${id}`}
-            className="block font-semibold text-gray-700"
-          >
-            Platform
-          </label>
-          <select
-            name={`Platform-${id}`}
-            id={`platform-${id}`}
-            className="w-full rounded-md bg-transparent p-2"
-          >
-            <option value="Github">Github</option>
-            <option value="Stack Overflow">Stack Overflow</option>
-          </select>
-          <p>{errorPlatform}</p>
-        </div>
-
-        <div>
-          <label
-            htmlFor={`link-${id}`}
-            className="block font-semibold text-gray-700"
-          >
-            Link
-          </label>
-          <input
-            type="url"
-            name={`Link-${id}`}
-            id={`link-${id}`}
-            placeholder="Platform link"
-            className={`w-full rounded-md bg-transparent p-2 ${
-              errorLink ? "border-red-500" : ""
-            }`}
-          />
-          <p className="text-sm text-red-500">{errorLink}</p>
-        </div>
+      <div className="mb-4 space-y-2 rounded-md bg-gray-100 p-2">
+        <Select id={id} errorPlatform={errorPlatform} platform={platform} />
+        <Input id={id} errorLink={errorLink} link={link} />
       </div>
     </div>
   );

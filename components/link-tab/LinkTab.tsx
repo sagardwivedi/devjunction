@@ -1,11 +1,9 @@
-import { getUserSocial } from "@/lib/data";
 import { LinkForm } from "./link-form";
 
 export async function LinkTab() {
-  const { social } = await getUserSocial();
   return (
     <div className="px-5 py-4 md:px-8 md:py-8">
-      <div className="space-y-8">
+      <div>
         <div>
           <h1 className="text-xl font-semibold md:text-6xl">
             Customize your links
@@ -16,7 +14,7 @@ export async function LinkTab() {
           </p>
         </div>
       </div>
-      <LinkForm social={social} />
+      <LinkForm />
     </div>
   );
 }

@@ -16,7 +16,7 @@ export function ClinetTab({ tab }: { tab: string }) {
   }
 
   return (
-    <div className="flex flex-row items-center gap-x-3 md:gap-x-10">
+    <div className="flex flex-row items-center gap-x-3 md:gap-x-5">
       <button
         onClick={() => handleClick("link")}
         className={`flex flex-row items-center gap-x-2 rounded-md px-4 py-2 hover:bg-gray-100 ${

@@ -27,7 +27,7 @@ export const ImageSelector = () => {
   return (
     <div
       onClick={handleClick}
-      className="cursor-pointer flex justify-center items-center flex-col rounded-md w-48 h-48 bg-gray-200"
+      className="flex h-48 w-48 cursor-pointer flex-col items-center justify-center rounded-md bg-gray-200"
     >
       <input
         type="file"
@@ -45,15 +45,15 @@ export const ImageSelector = () => {
             height={192}
             className="rounded-md bg-cover"
           />
-          <div className="bg-black/50 inset-0 absolute text-white flex justify-center items-center flex-col rounded-md">
-            <PhotoIcon className="w-8 h-8" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center rounded-md bg-black/50 text-white">
+            <PhotoIcon className="h-8 w-8" />
             <p>Change photo</p>
           </div>
         </div>
       )}
       {!selectedImage && (
-        <div className="flex flex-col justify-center items-center">
-          <PhotoIcon className="w-8 h-8" />
+        <div className="flex flex-col items-center justify-center">
+          <PhotoIcon className="h-8 w-8" />
           <p>Select photo</p>
         </div>
       )}

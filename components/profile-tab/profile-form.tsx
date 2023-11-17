@@ -11,10 +11,10 @@ export function ProfileForm({ user }: { user: UserProfile | null }) {
 
   return (
     <form action={action} className="space-y-5">
-      <div className="bg-gray-50 rounded-md px-2 py-4">
-        <div className="flex flex-col gap-4 md:flex-row items-center justify-between">
+      <div className="rounded-md bg-gray-50 px-2 py-4">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-gray-500">Profile Picture</p>
-          <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex flex-col items-center gap-4 md:flex-row">
             <ImageSelector />
             <p className="text-gray-500">
               Image must be below 1024x1024.
@@ -24,8 +24,8 @@ export function ProfileForm({ user }: { user: UserProfile | null }) {
         </div>
       </div>
 
-      <div className="bg-gray-50 rounded-md px-2 py-4 space-y-5">
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
+      <div className="space-y-5 rounded-md bg-gray-50 px-2 py-4">
+        <div className="flex flex-col justify-between md:flex-row md:items-center">
           <label className="flex-1 text-gray-500" htmlFor="firstname">
             First name*
           </label>
@@ -33,11 +33,11 @@ export function ProfileForm({ user }: { user: UserProfile | null }) {
             type="text"
             name="firstName"
             id="firstname"
-            className="w-full max-md:mt-1 md:w-[60%] rounded-md"
+            className="w-full rounded-md max-md:mt-1 md:w-[60%]"
             defaultValue={user?.firstname}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
+        <div className="flex flex-col justify-between md:flex-row md:items-center">
           <label className="flex-1 text-gray-500" htmlFor="lastname">
             Last name*
           </label>
@@ -45,11 +45,11 @@ export function ProfileForm({ user }: { user: UserProfile | null }) {
             type="text"
             name="lastName"
             id="lastname"
-            className="w-full max-md:mt-1 md:w-[60%] rounded-md"
+            className="w-full rounded-md max-md:mt-1 md:w-[60%]"
             defaultValue={user?.lastname}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
+        <div className="flex flex-col justify-between md:flex-row md:items-center">
           <label className="flex-1 text-gray-500" htmlFor="email">
             Email
           </label>
@@ -57,7 +57,7 @@ export function ProfileForm({ user }: { user: UserProfile | null }) {
             type="email"
             name="Email"
             id="email"
-            className="w-full max-md:mt-1 md:w-[60%] rounded-md"
+            className="w-full rounded-md max-md:mt-1 md:w-[60%]"
             defaultValue={user?.email}
           />
         </div>

@@ -52,20 +52,33 @@ export async function getUserData() {
 export async function getUserSocial() {
   const supabase = createClient(cookies());
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  if (user) {
-    const userId = user.id;
+    if (user) {
+      const userId = user.id;
 
-    const { data: socialLinks } = await supabase
-      .from("social_media_links")
-      .select("link, platform")
-      .eq("user_id", userId);
+      const { data } = await supabase
+        .from("social_media_links")
+        .select("link, platform")
+        .eq("user_id", userId);
 
-    return { social: socialLinks || [] };
+      if (data) {
+        const socialLinks = data.map((link, index) => ({
+          id: index + 1,
+          link: link.link,
+          platform: link.platform,
+        }));
+
+        return { social: socialLinks };
+      }
+    }
+
+    return { social: [] };
+  } catch (error) {
+    console.error("Error fetching user social media links:", error);
+    return { social: [] };
   }
-
-  return { social: null };
 }

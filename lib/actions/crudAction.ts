@@ -14,7 +14,7 @@ const linkSchema = object({
   platform: platform,
 });
 
-type PlatformEnum = z.infer<typeof platform>;
+export type PlatformEnum = z.infer<typeof platform>;
 
 const linksArraySchema = array(linkSchema);
 

@@ -1,8 +1,13 @@
 "use client";
 
-import { useMultipleInput } from "@/hooks/use-multiple-input";
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowDownIcon,
+  ArrowPathIcon,
+  ArrowUpIcon,
+} from "@heroicons/react/20/solid";
 import { useFormStatus } from "react-dom";
+
+import { useMultipleInput } from "@/hooks/use-multiple-input";
 
 export function MoveButton({ id }: { id: number }) {
   const { moveInputField } = useMultipleInput();
@@ -39,5 +44,19 @@ export function SaveButton() {
         Save
       </button>
     </div>
+  );
+}
+
+export function AuthFormButton({text}:{text: string}) {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      aria-disabled={pending}
+      disabled={pending}
+      className="flex w-full items-center justify-center gap-x-2 rounded-lg  bg-white p-2 text-black transition-all hover:bg-white hover:text-black active:opacity-50"
+    >
+      {pending ? <ArrowPathIcon className="h-5 w-5 animate-spin" /> : null}
+      {text}
+    </button>
   );
 }
