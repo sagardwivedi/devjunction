@@ -1,6 +1,6 @@
 import { DevLinksLogo } from "@/components/DevLinksLogo";
-import { PreviewButton } from "./preview-button";
 import { ClinetTab } from "./tabs/ClinetTab";
+import { PreviewButton } from "@/components/butons";
 
 export function EditorHeader({ id, tab }: { id: string; tab: string }) {
   return (

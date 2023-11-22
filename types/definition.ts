@@ -1,16 +1,4 @@
-export interface UserProfile {
-  firstname: string;
-  lastname: string;
-  email: string;
-  avatar_url: string;
-}
-
-export interface UserProfileSocial extends UserProfile {
-  socialMedia: Link[];
-}
-
-export interface Link {
+export interface PlatformField {
   id: number;
-  link: string;
-  platform: string;
+  name: string;
 }

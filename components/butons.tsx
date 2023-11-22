@@ -1,36 +1,7 @@
 "use client";
 
-import {
-  ArrowDownIcon,
-  ArrowPathIcon,
-  ArrowUpIcon,
-} from "@heroicons/react/20/solid";
+import { ArrowPathIcon } from "@heroicons/react/20/solid";
 import { useFormStatus } from "react-dom";
-
-import { useMultipleInput } from "@/hooks/use-multiple-input";
-
-export function MoveButton({ id }: { id: number }) {
-  const { moveInputField } = useMultipleInput();
-  return (
-    <>
-      <button type="button" onClick={() => moveInputField(id, "up")}>
-        <ArrowUpIcon className="h-5 w-5" />
-      </button>
-      <button type="button" onClick={() => moveInputField(id, "down")}>
-        <ArrowDownIcon className="h-5 w-5" />
-      </button>
-    </>
-  );
-}
-
-export function RemoveButton({ id }: { id: number }) {
-  const { removeInputField } = useMultipleInput();
-  return (
-    <button type="button" onClick={() => removeInputField(id)}>
-      Remove
-    </button>
-  );
-}
 
 export function SaveButton() {
   const { pending } = useFormStatus();
@@ -47,7 +18,7 @@ export function SaveButton() {
   );
 }
 
-export function AuthFormButton({text}:{text: string}) {
+export function AuthFormButton({ text }: { text: string }) {
   const { pending } = useFormStatus();
   return (
     <button
@@ -58,5 +29,20 @@ export function AuthFormButton({text}:{text: string}) {
       {pending ? <ArrowPathIcon className="h-5 w-5 animate-spin" /> : null}
       {text}
     </button>
+  );
+}
+
+import { EyeIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+
+export function PreviewButton({ id }: { id: string }) {
+  return (
+    <Link
+      className="block rounded-md border border-black px-4 py-2 transition-colors hover:bg-gray-100 hover:text-black"
+      href={`/l/${id}`}
+    >
+      <EyeIcon className="h-5 w-5 md:hidden" />
+      <p className="max-md:hidden">Preview</p>
+    </Link>
   );
 }

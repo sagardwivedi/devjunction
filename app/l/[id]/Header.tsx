@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { DevLinksLogo } from "@/components/DevLinksLogo";
 import { createClient } from "@/lib/supabase/serverClient";
-import { DevLinksLogo } from "./DevLinksLogo";
 
 export function UserHeader({ id }: { id: string }) {
   const signOut = async () => {

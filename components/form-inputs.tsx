@@ -26,7 +26,13 @@ export function EmailInput() {
       <label className="text-gray-950" htmlFor="email">
         Email
       </label>
-      <input type="email" name="Email" id="email" className="input-css" autoComplete="email" />
+      <input
+        type="email"
+        name="Email"
+        id="email"
+        className="input-css"
+        autoComplete="email"
+      />
     </div>
   );
 }

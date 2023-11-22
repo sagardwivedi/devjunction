@@ -2,6 +2,7 @@ import "server-only";
 
 import { cookies } from "next/headers";
 
+import { PlatformField } from "@/types/definition";
 import { createClient } from "./supabase/serverClient";
 
 export async function getUserId() {
@@ -81,4 +82,16 @@ export async function getUserSocial() {
     console.error("Error fetching user social media links:", error);
     return { social: [] };
   }
+}
+
+export async function fetchPlatforms(): Promise<PlatformField> {
+  const supabase = createClient(cookies());
+
+  const { data, error } = await supabase.from("platform").select("id, name");
+
+  if (error || data === null) {
+    throw new Error("Failed to fetch platforms");
+  }
+
+  return data;
 }
