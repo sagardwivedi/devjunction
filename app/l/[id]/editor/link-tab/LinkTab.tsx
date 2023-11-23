@@ -1,6 +1,10 @@
+import { fetchPlatforms, getUserSocial } from "@/lib/data";
 import { Form } from "./Form";
 
-export function LinkTab() {
+export async function LinkTab() {
+  const platforms = await fetchPlatforms();
+  const { social } = await getUserSocial();
+
   return (
     <div className="p-5 md:p-8">
       <div>
@@ -11,7 +15,7 @@ export function LinkTab() {
         </p>
       </div>
       <div>
-        <Form />
+        <Form platforms={platforms} social={social} />
       </div>
     </div>
   );

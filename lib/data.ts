@@ -1,5 +1,4 @@
-import "server-only";
-
+import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 
 import { PlatformField } from "@/types/definition";
@@ -84,7 +83,9 @@ export async function getUserSocial() {
   }
 }
 
-export async function fetchPlatforms(): Promise<PlatformField> {
+export async function fetchPlatforms(): Promise<PlatformField[]> {
+  unstable_noStore();
+
   const supabase = createClient(cookies());
 
   const { data, error } = await supabase.from("platform").select("id, name");

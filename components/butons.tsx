@@ -1,20 +1,35 @@
 "use client";
 
+import { useMultipleInput } from "@/hooks/use-multiple-input";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
+import { EyeIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { useFormStatus } from "react-dom";
+
+export function RemoveButton({ id }: { id: number }) {
+  const { removeInputField } = useMultipleInput();
+  return (
+    <button
+      onClick={() => removeInputField(id)}
+      type="button"
+      className="font-semibold text-neutral-500 hover:text-neutral-800"
+    >
+      Remove
+    </button>
+  );
+}
 
 export function SaveButton() {
   const { pending } = useFormStatus();
 
   return (
-    <div className="flex justify-end border-t border-gray-500 pt-5">
-      <button
-        className="rounded-md bg-black px-5 py-2 text-white"
-        disabled={pending}
-      >
-        Save
-      </button>
-    </div>
+    <button
+      className="bg-black disabled:bg-gray-500 text-white px-5 py-2 rounded-md"
+      disabled={pending}
+      aria-disabled={pending}
+    >
+      Save
+    </button>
   );
 }
 
@@ -31,9 +46,6 @@ export function AuthFormButton({ text }: { text: string }) {
     </button>
   );
 }
-
-import { EyeIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 
 export function PreviewButton({ id }: { id: string }) {
   return (

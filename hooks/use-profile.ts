@@ -1,14 +1,18 @@
-import { UserProfile } from "@/types/definition";
 import { create } from "zustand";
 
-interface UserState extends UserProfile {
-  setUserData: (data: Partial<UserProfile>) => void;
+interface Profile {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  photo?: string;
 }
 
-export const useUserState = create<UserState>()((set) => ({
-  email: "",
-  firstname: "",
-  lastname: "",
-  avatar_url: "",
-  setUserData: (data) => set(data),
+interface ProfileState {
+  data: Profile;
+  update: (data: Profile) => void;
+}
+
+export const useProfile = create<ProfileState>()((set) => ({
+  data: {},
+  update: (data) => set({ data: { ...data } }),
 }));

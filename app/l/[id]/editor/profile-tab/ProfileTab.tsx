@@ -1,9 +1,12 @@
 export function ProfileTab() {
   return (
-    <div className="p-4 md:p-8">
-      <div className="">
-        <h1></h1>
-        <p></p>
+    <div className="p-5 md:p-8">
+      <div>
+        <h1 className="text-2xl font-bold md:text-5xl">Customize your links</h1>
+        <p className="mt-2 text-sm text-gray-500">
+          Add/edit/remove links below and then share all your profiles with the
+          world!
+        </p>
       </div>
       <div></div>
     </div>
