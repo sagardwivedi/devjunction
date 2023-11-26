@@ -1,10 +1,10 @@
-"use server";
+'use server';
 
-import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { object, string } from "zod";
+import { cookies, headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { object, string } from 'zod';
 
-import { createClient } from "@/lib/supabase/serverClient";
+import { createClient } from '@/lib/supabase/serverClient';
 
 const AuthSchema = object({
   email: string().email(),
@@ -17,12 +17,12 @@ const LoginSchema = AuthSchema.omit({ firstname: true, lastname: true });
 
 export async function loginAction(formData: FormData) {
   const validate = LoginSchema.safeParse({
-    email: formData.get("Email") as string,
-    password: formData.get("Password") as string,
+    email: formData.get('Email') as string,
+    password: formData.get('Password') as string,
   });
 
   if (!validate.success) {
-    const errorMessage = "Please check your inputs.";
+    const errorMessage = 'Please check your inputs.';
     return redirect(`/login?message=${encodeURIComponent(errorMessage)}`);
   }
 
@@ -50,17 +50,17 @@ export async function loginAction(formData: FormData) {
 }
 
 export async function signupAction(formData: FormData) {
-  const origin = headers().get("origin");
+  const origin = headers().get('origin');
 
   const validate = AuthSchema.safeParse({
-    firstname: formData.get("firstName") as string,
-    lastname: formData.get("lastName") as string,
-    email: formData.get("Email") as string,
-    password: formData.get("Password") as string,
+    firstname: formData.get('firstName') as string,
+    lastname: formData.get('lastName') as string,
+    email: formData.get('Email') as string,
+    password: formData.get('Password') as string,
   });
 
   if (!validate.success) {
-    const errorMessage = "Please check your inputs.";
+    const errorMessage = 'Please check your inputs.';
     return redirect(`/signup?message=${encodeURIComponent(errorMessage)}`);
   }
 
@@ -81,5 +81,5 @@ export async function signupAction(formData: FormData) {
     return redirect(`/signup?message=Failed to authenticate`);
   }
 
-  return redirect("/signup?message=Check email to continue sign in process");
+  return redirect('/signup?message=Check email to continue sign in process');
 }

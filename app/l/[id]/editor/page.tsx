@@ -1,5 +1,5 @@
-import { EditorHeader } from "./header";
-import { TabContent } from "./tabs/TabContent";
+import { EditorHeader } from './header';
+import { TabContent } from './tabs/TabContent';
 
 export default function Editor({
   params,
@@ -8,7 +8,7 @@ export default function Editor({
   params: { id: string };
   searchParams: { tab?: string };
 }) {
-  const tab = searchParams?.tab || "link";
+  const tab = searchParams?.tab || 'link';
 
   return (
     <div className="p-2 md:p-6">

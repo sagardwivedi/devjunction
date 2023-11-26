@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
+import { PlusIcon } from '@heroicons/react/24/outline';
+import { useEffect } from 'react';
+import { useFormState } from 'react-dom';
 
-import { SaveButton } from "@/components/butons";
-import { useMultipleInput } from "@/hooks/use-multiple-input";
-import { saveLinks } from "@/lib/actions/crudAction";
-import { Link, PlatformField } from "@/types/definition";
-import { Inputs } from "./Input";
+import { SaveButton } from '@/components/butons';
+import { useMultipleInput } from '@/hooks/use-multiple-input';
+import { saveLinks } from '@/lib/actions/crudAction';
+import { Link, PlatformField } from '@/types/definition';
+import { Inputs } from './Input';
 
 export function Form({
   platforms,
@@ -17,7 +17,7 @@ export function Form({
   platforms: PlatformField[];
   social: Link[];
 }) {
-  const initialState = { message: "", errors: [] };
+  const initialState = { message: '', errors: [] };
   const [state, dispatch] = useFormState(saveLinks, initialState);
   const { addInputField, inputFields, setInputFields } = useMultipleInput();
 
@@ -53,7 +53,7 @@ export function Form({
             );
           })}
         </div>
-        <div className="flex pl-2 justify-between items-center pt-5 border-t border-gray-500">
+        <div className="flex items-center justify-between border-t border-gray-500 pl-2 pt-5">
           <div>{state?.message ? <p>{state.message}</p> : null}</div>
           <SaveButton />
         </div>

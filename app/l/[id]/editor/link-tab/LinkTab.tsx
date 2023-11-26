@@ -1,5 +1,6 @@
-import { fetchPlatforms, getUserSocial } from "@/lib/data";
-import { Form } from "./Form";
+import { fetchPlatforms, getUserSocial } from '@/lib/data';
+import { Suspense } from 'react';
+import { Form } from './Form';
 
 export async function LinkTab() {
   const platforms = await fetchPlatforms();
@@ -15,7 +16,9 @@ export async function LinkTab() {
         </p>
       </div>
       <div>
-        <Form platforms={platforms} social={social} />
+        <Suspense>
+          <Form platforms={platforms} social={social} />
+        </Suspense>
       </div>
     </div>
   );

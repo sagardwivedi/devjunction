@@ -1,4 +1,4 @@
-import { LinkIcon } from "@heroicons/react/20/solid";
+import { LinkIcon } from '@heroicons/react/20/solid';
 
 export const DevLinksLogo = () => {
   return (

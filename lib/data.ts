@@ -1,8 +1,8 @@
-import { unstable_noStore } from "next/cache";
-import { cookies } from "next/headers";
+import { unstable_noStore } from 'next/cache';
+import { cookies } from 'next/headers';
 
-import { PlatformField } from "@/types/definition";
-import { createClient } from "./supabase/serverClient";
+import { PlatformField } from '@/types/definition';
+import { createClient } from './supabase/serverClient';
 
 export async function getUserId() {
   const supabase = createClient(cookies());
@@ -31,16 +31,16 @@ export async function getUserData() {
     const id = user.id;
 
     const { data } = await supabase
-      .from("profiles")
-      .select("firstname, lastname, email, avatar_url")
-      .eq("id", id)
+      .from('profiles')
+      .select('firstname, lastname, email, avatar_url')
+      .eq('id', id)
       .single();
 
     const userData = {
-      firstname: data?.firstname || "",
-      lastname: data?.lastname || "",
-      email: data?.email || "",
-      avatar_url: data?.avatar_url || "",
+      firstname: data?.firstname || '',
+      lastname: data?.lastname || '',
+      email: data?.email || '',
+      avatar_url: data?.avatar_url || '',
     };
 
     return { user: userData };
@@ -61,9 +61,9 @@ export async function getUserSocial() {
       const userId = user.id;
 
       const { data } = await supabase
-        .from("social_media_links")
-        .select("link, platform")
-        .eq("user_id", userId);
+        .from('social_media_links')
+        .select('link, platform')
+        .eq('user_id', userId);
 
       if (data) {
         const socialLinks = data.map((link, index) => ({
@@ -78,7 +78,7 @@ export async function getUserSocial() {
 
     return { social: [] };
   } catch (error) {
-    console.error("Error fetching user social media links:", error);
+    console.error('Error fetching user social media links:', error);
     return { social: [] };
   }
 }
@@ -88,10 +88,10 @@ export async function fetchPlatforms(): Promise<PlatformField[]> {
 
   const supabase = createClient(cookies());
 
-  const { data, error } = await supabase.from("platform").select("id, name");
+  const { data, error } = await supabase.from('platform').select('id, name');
 
   if (error || data === null) {
-    throw new Error("Failed to fetch platforms");
+    throw new Error('Failed to fetch platforms');
   }
 
   return data;

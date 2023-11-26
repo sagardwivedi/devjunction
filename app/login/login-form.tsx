@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { loginAction } from "@/lib/actions/authAction";
-import { EmailInput, PasswordInput } from "@/components/form-inputs";
-import { AuthFormButton } from "@/components/butons";
+import { loginAction } from '@/lib/actions/authAction';
+import { EmailInput, PasswordInput } from '@/components/form-inputs';
+import { AuthFormButton } from '@/components/butons';
 
 export function LoginForm() {
   return (
@@ -14,7 +14,7 @@ export function LoginForm() {
       <AuthFormButton text="Log In" />
       <div className="flex flex-row justify-center gap-x-2">
         <p>Aleadry have an account?</p>
-        <Link href={"/signup"} className="text-blue-500 hover:underline">
+        <Link href={'/signup'} className="text-blue-500 hover:underline">
           Signup
         </Link>
       </div>

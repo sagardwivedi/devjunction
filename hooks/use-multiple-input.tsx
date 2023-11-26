@@ -1,7 +1,7 @@
-import { Link } from "@/types/definition";
-import { create } from "zustand";
+import { Link } from '@/types/definition';
+import { create } from 'zustand';
 
-type Direction = "up" | "down";
+type Direction = 'up' | 'down';
 
 interface UseMultipleInputStore {
   inputFields: Link[];
@@ -14,8 +14,8 @@ interface UseMultipleInputStore {
 
 export const useMultipleInput = create<UseMultipleInputStore>()((set) => ({
   inputFields: [
-    { id: 1, platform: "", link: "" },
-    { id: 2, link: "", platform: "" },
+    { id: 1, platform: '', link: '' },
+    { id: 2, link: '', platform: '' },
   ],
 
   setInputFields: (newFields: Link[]) => {
@@ -26,7 +26,7 @@ export const useMultipleInput = create<UseMultipleInputStore>()((set) => ({
     set((state) => ({
       inputFields: [
         ...state.inputFields,
-        { id: state.inputFields.length + 1, link: "", platform: "" },
+        { id: state.inputFields.length + 1, link: '', platform: '' },
       ],
     }));
   },
@@ -39,12 +39,12 @@ export const useMultipleInput = create<UseMultipleInputStore>()((set) => ({
   moveInputField: (id: number, direction: Direction) => {
     set((state) => {
       const currentIndex = state.inputFields.findIndex(
-        (field) => field.id === id
+        (field) => field.id === id,
       );
 
       if (currentIndex === -1) return state;
 
-      const newIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+      const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
 
       if (newIndex < 0 || newIndex >= state.inputFields.length) return state;
 
@@ -61,7 +61,7 @@ export const useMultipleInput = create<UseMultipleInputStore>()((set) => ({
   updateInputField: (id: number, updatedField: Partial<Link>) => {
     set((state) => ({
       inputFields: state.inputFields.map((field) =>
-        field.id === id ? { ...field, ...updatedField } : field
+        field.id === id ? { ...field, ...updatedField } : field,
       ),
     }));
   },

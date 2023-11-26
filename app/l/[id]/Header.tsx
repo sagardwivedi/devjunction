@@ -1,18 +1,18 @@
-import { PencilIcon } from "@heroicons/react/20/solid";
-import { cookies } from "next/headers";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import { PencilIcon } from '@heroicons/react/20/solid';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
-import { DevLinksLogo } from "@/components/DevLinksLogo";
-import { createClient } from "@/lib/supabase/serverClient";
+import { DevLinksLogo } from '@/components/DevLinksLogo';
+import { createClient } from '@/lib/supabase/serverClient';
 
 export function UserHeader({ id }: { id: string }) {
   const signOut = async () => {
-    "use server";
+    'use server';
 
     const supabase = createClient(cookies());
     await supabase.auth.signOut();
-    return redirect("/login");
+    return redirect('/login');
   };
 
   return (

@@ -1,4 +1,4 @@
-import { UserHeader } from "@/app/l/[id]/Header";
+import { UserHeader } from '@/app/l/[id]/Header';
 
 export default function page({ params }: { params: { id: string } }) {
   return (

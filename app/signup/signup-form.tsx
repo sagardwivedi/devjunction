@@ -1,13 +1,13 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { AuthFormButton } from "@/components/butons";
-import { signupAction } from "@/lib/actions/authAction";
+import { AuthFormButton } from '@/components/butons';
+import { signupAction } from '@/lib/actions/authAction';
 import {
   EmailInput,
   FnameInput,
   LnameInput,
   PasswordInput,
-} from "@/components/form-inputs";
+} from '@/components/form-inputs';
 
 export function SignupForm() {
   return (
@@ -23,7 +23,7 @@ export function SignupForm() {
       <AuthFormButton text="Sign Up" />
       <div className="flex flex-row justify-center gap-x-2">
         <p>Aleadry have an account?</p>
-        <Link href={"/login"} className="text-blue-500 hover:underline">
+        <Link href={'/login'} className="text-blue-500 hover:underline">
           Login
         </Link>
       </div>

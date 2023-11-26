@@ -1,8 +1,8 @@
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
-import Image from "next/image";
-import Link from "next/link";
+import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { DevLinksLogo } from "@/components/DevLinksLogo";
+import { DevLinksLogo } from '@/components/DevLinksLogo';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
             Unleash your online presence
           </h1>
           <Link
-            href={"/login"}
+            href={'/login'}
             className="group flex flex-row items-center gap-x-2 rounded-full bg-black px-4 py-2 text-lg text-white"
           >
             <p className="font-sans">Get Started</p>
@@ -24,7 +24,7 @@ export default function Home() {
         <div className="grid w-full grid-cols-3 grid-rows-3 gap-5 overflow-hidden">
           <div className="col-span-2 h-[143px] rounded-b-full rounded-tl-full bg-neutral-500" />
           <Image
-            src={"/write.png"}
+            src={'/write.png'}
             alt=""
             width={100}
             height={100}
@@ -33,7 +33,7 @@ export default function Home() {
           />
 
           <Image
-            src={"/code.png"}
+            src={'/code.png'}
             alt=""
             width={100}
             height={100}
@@ -43,7 +43,7 @@ export default function Home() {
           <div className="col-span-1 h-[144px] w-auto bg-neutral-500" />
 
           <Image
-            src={"/note.png"}
+            src={'/note.png'}
             alt=""
             width={100}
             height={100}
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="col-span-1 h-[143px] w-auto rounded-full bg-neutral-500" />
 
           <Image
-            src={"/person.png"}
+            src={'/person.png'}
             alt=""
             width={1000}
             height={1000}

@@ -1,30 +1,16 @@
-"use client";
+'use client';
 
-import { useMultipleInput } from "@/hooks/use-multiple-input";
-import { ArrowPathIcon } from "@heroicons/react/20/solid";
-import { EyeIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { useFormStatus } from "react-dom";
-
-export function RemoveButton({ id }: { id: number }) {
-  const { removeInputField } = useMultipleInput();
-  return (
-    <button
-      onClick={() => removeInputField(id)}
-      type="button"
-      className="font-semibold text-neutral-500 hover:text-neutral-800"
-    >
-      Remove
-    </button>
-  );
-}
+import { ArrowPathIcon } from '@heroicons/react/20/solid';
+import { EyeIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { useFormStatus } from 'react-dom';
 
 export function SaveButton() {
   const { pending } = useFormStatus();
 
   return (
     <button
-      className="bg-black disabled:bg-gray-500 text-white px-5 py-2 rounded-md"
+      className="rounded-md bg-black px-5 py-2 text-white disabled:bg-gray-500"
       disabled={pending}
       aria-disabled={pending}
     >

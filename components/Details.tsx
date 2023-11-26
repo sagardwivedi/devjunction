@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
-import Image from "next/image";
-import Link from "next/link";
+import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { useMultipleInput } from "@/hooks/use-multiple-input";
-import { useProfile } from "@/hooks/use-profile";
-import { Link as LinkType } from "@/types/definition";
+import { useMultipleInput } from '@/hooks/use-multiple-input';
+import { useProfile } from '@/hooks/use-profile';
+import { Link as LinkType } from '@/types/definition';
 
 function LinkCard({ link, platform }: LinkType) {
   if (link.length === 0 || platform.length === 0) {
-    return <div className="w-full bg-gray-200 h-10 rounded-md"></div>;
+    return <div className="h-10 w-full rounded-md bg-gray-200"></div>;
   }
 
   return (
@@ -33,8 +33,8 @@ export function Details() {
   const fullName = !firstname && !lastname;
 
   return (
-    <div className="flex h-full flex-col space-y-5 items-center py-5">
-      <div className="flex justify-center items-center gap-3 flex-col">
+    <div className="flex h-full flex-col items-center space-y-5 py-5">
+      <div className="flex flex-col items-center justify-center gap-3">
         {photo ? (
           <Image
             src={photo}
@@ -44,16 +44,16 @@ export function Details() {
             className="rounded-full"
           />
         ) : (
-          <div className="w-[150px] h-[150px] rounded-full bg-gray-200"></div>
+          <div className="h-[150px] w-[150px] rounded-full bg-gray-200"></div>
         )}
-        <div className="flex justify-center items-center flex-col gap-2">
+        <div className="flex flex-col items-center justify-center gap-2">
           {!fullName ? (
             <h2>
               {firstname}
               {lastname}
             </h2>
           ) : (
-            <h2 className="bg-gray-200 h-5 w-40 rounded-md"></h2>
+            <h2 className="h-5 w-40 rounded-md bg-gray-200"></h2>
           )}
           {email ? (
             <p>{email}</p>

@@ -1,6 +1,6 @@
-import { DevLinksLogo } from "@/components/DevLinksLogo";
-import { LoginForm } from "./login-form";
-import { Messsage } from "@/components/Message";
+import { DevLinksLogo } from '@/components/DevLinksLogo';
+import { LoginForm } from './login-form';
+import { Messsage } from '@/components/Message';
 
 export default function Login() {
   return (

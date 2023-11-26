@@ -1,6 +1,6 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from 'next/server';
 
-import { createClient } from "@/lib/supabase/middlewareClinet";
+import { createClient } from '@/lib/supabase/middlewareClinet';
 
 export async function middleware(request: NextRequest) {
   const { response, supabase } = createClient(request);
@@ -10,12 +10,12 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ["/l/:path*"],
+  matcher: ['/l/:path*'],
 };
