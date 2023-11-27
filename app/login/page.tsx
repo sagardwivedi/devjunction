@@ -1,7 +1,8 @@
-import { DevLinksLogo } from '@/components/DevLinksLogo';
-import { LoginForm } from './login-form';
-import { Messsage } from '@/components/Message';
 import { Suspense } from 'react';
+
+import { DevLinksLogo } from '@/components/DevLinksLogo';
+import { Messsage } from '@/components/Message';
+import { LoginForm } from './login-form';
 
 export default function Login() {
   return (
