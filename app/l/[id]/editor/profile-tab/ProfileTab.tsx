@@ -1,14 +1,18 @@
-export function ProfileTab() {
+import { getUserData } from '@/lib/data';
+import ProfileForm from './profile-form';
+
+export async function ProfileTab() {
+  const { user } = await getUserData();
+
   return (
     <div className="p-5 md:p-8">
       <div>
-        <h1 className="text-2xl font-bold md:text-5xl">Customize your links</h1>
+        <h1 className="text-2xl font-bold md:text-4xl">Profile Details</h1>
         <p className="mt-2 text-sm text-gray-500">
-          Add/edit/remove links below and then share all your profiles with the
-          world!
+          Add your details to create a personal touch to your profile.
         </p>
       </div>
-      <div></div>
+      <ProfileForm user={user} />
     </div>
   );
 }

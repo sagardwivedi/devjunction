@@ -1,18 +1,30 @@
 import { create } from 'zustand';
 
-interface Profile {
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  photo?: string;
+export interface Profile {
+  firstname: string;
+  lastname: string;
+  email: string;
+  avatar_url: string;
 }
 
 interface ProfileState {
   data: Profile;
-  update: (data: Profile) => void;
+  update: (data: Partial<Profile>) => void;
 }
 
 export const useProfile = create<ProfileState>()((set) => ({
-  data: {},
-  update: (data) => set({ data: { ...data } }),
+  data: {
+    avatar_url: '',
+    email: '',
+    firstname: '',
+    lastname: '',
+  },
+  update: (data: Partial<Profile>) => {
+    set((state) => ({
+      data: {
+        ...state.data,
+        ...data,
+      },
+    }));
+  },
 }));

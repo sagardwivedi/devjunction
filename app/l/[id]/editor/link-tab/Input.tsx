@@ -3,7 +3,6 @@
 import { useMultipleInput } from '@/hooks/use-multiple-input';
 import { PlatformField } from '@/types/definition';
 import { LinkIcon } from '@heroicons/react/20/solid';
-import { DeleteForm } from './delete-form';
 
 function Input({
   id,
@@ -107,7 +106,7 @@ export function Inputs({
     <div className="space-y-2 rounded-md bg-gray-50 p-3">
       <div className="flex flex-row items-center justify-between">
         <p className="text-sm font-bold text-gray-500">Link #{id}</p>
-        <DeleteForm id={id} />
+        {/* <DeleteForm id={id} /> */}
       </div>
       <div className="space-y-2">
         <input type="hidden" name="ID" value={id} />

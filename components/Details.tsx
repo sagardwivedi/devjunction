@@ -27,7 +27,7 @@ function LinkCard({ link, platform }: LinkType) {
 export function Details() {
   const { inputFields: links } = useMultipleInput();
   const {
-    data: { email, firstname, lastname, photo },
+    data: { email, firstname, lastname, avatar_url },
   } = useProfile();
 
   const fullName = !firstname && !lastname;
@@ -35,9 +35,9 @@ export function Details() {
   return (
     <div className="flex h-full flex-col items-center space-y-5 py-5">
       <div className="flex flex-col items-center justify-center gap-3">
-        {photo ? (
+        {avatar_url ? (
           <Image
-            src={photo}
+            src={avatar_url}
             alt=""
             width={150}
             height={150}
