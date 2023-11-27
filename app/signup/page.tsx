@@ -1,5 +1,7 @@
-import DevLinksLogo from "@/components/DevLinksLogo";
-import { SignupForm } from "./signup-form";
+import { DevLinksLogo } from '@/components/DevLinksLogo';
+import { Messsage } from '@/components/Message';
+import { Suspense } from 'react';
+import { SignupForm } from './signup-form';
 
 export default function Signup() {
   return (
@@ -10,6 +12,9 @@ export default function Signup() {
       <div className="mx-auto w-[90%] max-w-md md:w-full">
         <SignupForm />
       </div>
+      <Suspense>
+        <Messsage />
+      </Suspense>
     </div>
   );
 }

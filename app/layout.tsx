@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import "./globals.css";
+import { Toaster } from 'react-hot-toast';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "DevLinks",
+  title: 'DevLinks',
 };
 
 export default function RootLayout({
@@ -13,8 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-black text-white antialiased`}>
+      <body className={`bg-gray-100 text-black antialiased`}>
         <main>{children}</main>
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );

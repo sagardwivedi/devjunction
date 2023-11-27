@@ -1,20 +1,10 @@
-"use server";
+'use server';
 
-import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { object, string } from "zod";
+import { cookies, headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { object, string } from 'zod';
 
-import { createClient } from "@/lib/supabase/serverClient";
-
-type State = {
-  errors?: {
-    firstname?: string[];
-    lastname?: string[];
-    email?: string[];
-    password?: string[];
-  };
-  message?: string | null;
-};
+import { createClient } from '@/lib/supabase/serverClient';
 
 const AuthSchema = object({
   email: string().email(),
@@ -25,17 +15,15 @@ const AuthSchema = object({
 
 const LoginSchema = AuthSchema.omit({ firstname: true, lastname: true });
 
-export async function loginAction(prevState: State, formData: FormData) {
+export async function loginAction(formData: FormData) {
   const validate = LoginSchema.safeParse({
-    email: formData.get("Email"),
-    password: formData.get("Password"),
+    email: formData.get('Email') as string,
+    password: formData.get('Password') as string,
   });
 
   if (!validate.success) {
-    return {
-      errors: validate.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Login.",
-    };
+    const errorMessage = 'Please check your inputs.';
+    return redirect(`/login?message=${encodeURIComponent(errorMessage)}`);
   }
 
   const { email, password } = validate.data;
@@ -51,31 +39,29 @@ export async function loginAction(prevState: State, formData: FormData) {
   });
 
   if (error || user === null) {
-    return { message: "Failed to authenticate" };
+    return redirect(`/login?message=Failed to authenticate`);
   }
 
   const { firstname } = user.user_metadata as {
     firstname: string;
   };
 
-  redirect(`/l/${firstname.toLowerCase()}`);
+  redirect(`/l/${firstname}`);
 }
 
-export async function signupAction(prevState: State, formData: FormData) {
-  const origin = headers().get("origin");
+export async function signupAction(formData: FormData) {
+  const origin = headers().get('origin');
 
   const validate = AuthSchema.safeParse({
-    firstname: formData.get("firstName"),
-    lastname: formData.get("lastName"),
-    email: formData.get("Email"),
-    password: formData.get("Password"),
+    firstname: formData.get('firstName') as string,
+    lastname: formData.get('lastName') as string,
+    email: formData.get('Email') as string,
+    password: formData.get('Password') as string,
   });
 
   if (!validate.success) {
-    return {
-      errors: validate.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Sign up.",
-    };
+    const errorMessage = 'Please check your inputs.';
+    return redirect(`/signup?message=${encodeURIComponent(errorMessage)}`);
   }
 
   const { email, firstname, lastname, password } = validate.data;
@@ -92,9 +78,8 @@ export async function signupAction(prevState: State, formData: FormData) {
   });
 
   if (error) {
-    return { message: "Could not authenticate user" };
-  } else {
+    return redirect(`/signup?message=Failed to authenticate`);
   }
 
-  return { message: "Check email to continue sign in process" };
+  return redirect('/signup?message=Check email to continue sign in process');
 }

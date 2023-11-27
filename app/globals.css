@@ -12,6 +12,10 @@
   .landing-img {
     @apply h-[143px] w-full rounded-bl-full rounded-tl-full rounded-tr-full object-cover bg-blend-luminosity grayscale;
   }
+
+  .input-css {
+    @apply mt-1 w-full rounded-md border border-gray-300 bg-white p-2 focus:outline-none;
+  }
 }
 
 .animate-in {

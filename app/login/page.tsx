@@ -1,5 +1,8 @@
-import DevLinksLogo from "@/components/DevLinksLogo";
-import { LoginForm } from "./login-form";
+import { Suspense } from 'react';
+
+import { DevLinksLogo } from '@/components/DevLinksLogo';
+import { Messsage } from '@/components/Message';
+import { LoginForm } from './login-form';
 
 export default function Login() {
   return (
@@ -10,6 +13,9 @@ export default function Login() {
       <div className="mx-auto w-[90%] max-w-md md:w-full">
         <LoginForm />
       </div>
+      <Suspense>
+        <Messsage />
+      </Suspense>
     </div>
   );
 }
